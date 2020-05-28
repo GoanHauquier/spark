@@ -25,7 +25,7 @@ firebase.initializeApp(firebaseConfig);
 
 let app;
 
-// check if user is logged in before app is build
+// check if user is logged in before app is built
 // to prevent weird route behaviour
 firebase.auth().onAuthStateChanged(user=> {
   console.log(user);
