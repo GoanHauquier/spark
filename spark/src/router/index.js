@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import Authtest from '../views/Auth/Authtest.vue'
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 Vue.use(VueRouter)
 
@@ -34,7 +36,9 @@ Vue.use(VueRouter)
   {
     path: '/test',
     name: 'Authtest',
-    component: Authtest
+    component: Authtest,
+    // routeguard data
+    meta: { Authenticated: true }
   },
 ]
 
@@ -42,6 +46,20 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+
+// routeguard
+// if user exists the "Authenticated" object is set to true
+router.beforeEach((to, from, next)=> {
+  const Authenticated = to.matched.some(record => record.meta.Authenticated);
+  const isAuthenticated = firebase.auth().currentUser;
+  if(Authenticated && !isAuthenticated) {
+    next('/login');
+  }
+  else {
+    next();
+  }
 })
 
 export default router
