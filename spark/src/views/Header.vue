@@ -1,14 +1,22 @@
 <template>
     <div>
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link> |
-        <span v-if="!user">
-            <router-link to="/login">Login</router-link> |
-            <router-link to="/register">Register</router-link> |
-        </span>
-        <span v-else>
-            <router-link to="/test">{{ cUserData.cUsername }}</router-link>
-        </span>
+        <div class="text-left">
+            SPARK
+        </div>
+        <div class="text-right">
+            <router-link to="/">Home</router-link> |
+            <router-link to="/about">About</router-link> |
+            <span v-if="!user">
+                <router-link to="/login">Login</router-link> |
+                <router-link to="/register">Register</router-link> |
+            </span>
+            <span v-else>
+                <button @click="dropdown()" class="dropbtn">{{ cUserData.cUsername }}</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <router-link to="/test">Profile</router-link>
+                </div>
+            </span>
+        </div>
     </div>
 </template>
 
@@ -32,6 +40,11 @@ import 'firebase/auth';
             }
             else {
                 this.user = false;
+            }
+        },
+        methods: {
+            dropdown() {
+                console.log('pressed');
             }
         },
     }

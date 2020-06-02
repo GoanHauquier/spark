@@ -5,8 +5,11 @@ import store from './store'
 import axios from 'axios'
 import firebase from 'firebase/app'
 import { firestorePlugin } from 'vuefire'
+import { BootstrapVue } from 'bootstrap-vue'
+import './assets/scss/application.scss';
 
 Vue.use(firestorePlugin)
+Vue.use(BootstrapVue)
 
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false

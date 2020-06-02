@@ -1,7 +1,9 @@
 <template>
-    <div>
-        <Header v-bind:cUserData="cUserData" />
-        <router-view />
+    <div class="wrapper"> <!-- Main wrapper -->
+        <div class="top-wrapper"> <!-- Top wrapper -->
+            <Header v-bind:cUserData="cUserData" />
+            <router-view />
+        </div>
         <Footer />
     </div>
 </template>
