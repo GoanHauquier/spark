@@ -4,6 +4,9 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import firebase from 'firebase/app'
+import { firestorePlugin } from 'vuefire'
+
+Vue.use(firestorePlugin)
 
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false
@@ -20,7 +23,9 @@ const firebaseConfig = {
   measurementId: "G-BC683SF45H"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig)
+export const db = firebase
+  .firestore()
 // firebase.analytics();
 
 let app;

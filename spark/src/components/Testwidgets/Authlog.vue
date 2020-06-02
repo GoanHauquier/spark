@@ -9,6 +9,8 @@
 <script>
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/firestore';
+// import {db} from '../../main';
 
     export default {
         data() {
@@ -26,8 +28,8 @@ import 'firebase/auth';
                 catch(err) {
                     console.log(err);
                 }
-            }
-        },
+            },
+        },  
         created () {
             firebase.auth().onAuthStateChanged(user=> {
                 if (user) {
