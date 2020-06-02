@@ -1,23 +1,20 @@
 <template>
   <div id="app">
     <div id="nav">
-      <Authlog />
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/register">Register</router-link> |
-      <router-link to="/test">Test</router-link>
+      <Main />
+      <!-- <Authlog /> -->
     </div>
-    <router-view/>
   </div>
 </template>
 
 <script>
-import Authlog from './components/Testwidgets/Authlog';
+// import Authlog from './components/Testwidgets/Authlog';
+import Main from './views/Main';
 
   export default {
     components: {
-      Authlog
+      // Authlog,
+      Main
     },
   }
 </script>

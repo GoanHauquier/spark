@@ -32,8 +32,10 @@ import 'firebase/auth';
         methods: {
             async onSubmit() {
                 try {
+                    // await log in credentials from firebase to login
                     const val = await firebase.auth().signInWithEmailAndPassword(this.email, this.password);
                     console.log(val);
+                    // move views
                     this.$router.replace({ name: 'Authtest' });
                 }
                 catch(err) {

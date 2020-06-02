@@ -19,6 +19,7 @@ import {db} from '../../main';
         data() {
             return {
                 id: '',
+                // create userdata object
                 cUserData: {
                     cUsername: '',
                     cBio: '',
@@ -28,16 +29,18 @@ import {db} from '../../main';
             }
         },
         created () {
+            // fetch user data
             const user = firebase.auth().currentUser;
             this.id = user.uid;
             this.id = this.id.toString();
 
+            // fetch user data from firestore
             db.collection('users')
             .doc(this.id)
             .get()
             .then(snapshot => {
                 const document = snapshot.data()
-                // do something with document
+                // set the userdata object to the current firestore data
                 this.cUserData.cUsername = document.username;
                 this.cUserData.cBio = document.bio;
                 this.cUserData.cIsAdmin = document.isAdmin;
@@ -46,19 +49,26 @@ import {db} from '../../main';
         },
         methods: {
             editBio() {
+                this.$forceUpdate();
+                // set variable equal to user input
                 const newBio = this.$refs.bioInput.value;
                 console.log(newBio);
                 
+                // if new input exists when submitted
                 if (newBio) {
+                        // set firestore data equal to new data
                         db.collection("users").doc(this.id).update({
-                        bio: newBio
-                    });
+                            bio: newBio
+                        }
+                    );
 
                     this.$refs.bioInput.value = newBio;
+                    console.log('epic');
                 }
                 else {
                     alert('error');
                 }
+                
             }
         },
         

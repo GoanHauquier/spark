@@ -38,25 +38,31 @@ import {db} from '../../main';
         },
         methods: {
             async onSubmit() {
-                alert('registered');
-
+                // make a new user record in firebase Auth()
                 firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then((user)=> {
 
+                    // if new user record is created successfully
                     if(user) {
-
+                        // fetch user data
                         const cUser = firebase.auth().currentUser;
+
+                        // set username as form input username
                         cUser.updateProfile({
                             displayName: this.username
                         });
+                        // make new user document in firestore
                         db.collection('users').doc(cUser.uid).set({
                             userId: cUser.uid,
                             username: this.username,
                             bio: 'My Bio',
                             isAdmin: false
                         });
+                        // move views
+                        this.$router.replace({ name: 'Authtest' });
                     }
                 }).catch(function(error) {
-                        console.log(error);
+                    // if errors occur
+                    console.log(error);
                 });
                 
                 /*

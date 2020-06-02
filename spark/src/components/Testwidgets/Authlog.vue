@@ -1,6 +1,6 @@
 <template>
     <div>
-        <span v-if="loggedIn">Logged in</span>
+        <span v-if="loggedIn">Logged in </span>
         <span v-else>Logged out</span>
         <button @click='signOut'>Sign out</button>
     </div>
@@ -31,6 +31,7 @@ import 'firebase/firestore';
             },
         },  
         created () {
+            // check if user is logged in
             firebase.auth().onAuthStateChanged(user=> {
                 if (user) {
                     this.loggedIn = true;
