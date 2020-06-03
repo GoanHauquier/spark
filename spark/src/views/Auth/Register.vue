@@ -15,6 +15,9 @@
             <div>
                 <input type="password" v-model='password' placeholder="Password" required>
             </div>
+            <div>
+                <input type="password" placeholder="Retype password" ref="passwordval" required>
+            </div>
             <button type='submit'>Register</button>
         </form>
     </div>
@@ -24,6 +27,7 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/storage';
 import {db} from '../../main';
 
     export default {
@@ -33,37 +37,43 @@ import {db} from '../../main';
                 email: '',
                 password: '',
                 bio: '',
+                picture: '',
                 error: '',
+                standard: 'https://firebasestorage.googleapis.com/v0/b/spark-a6f3f.appspot.com/o/standard%2Fspark_logo.png?alt=media&token=c5efe70e-527f-4986-9827-71360a4e2f91'
+
             }
         },
         methods: {
             async onSubmit() {
-                // make a new user record in firebase Auth()
-                firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then((user)=> {
+                const passwordValidation = this.$refs.passwordval.value;
+                if (passwordValidation == this.password) {
+                    // make a new user record in firebase Auth()
+                    firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then((user)=> {
+                        // if new user record is created successfully
+                        if(user) {
+                            // fetch user data
+                            const cUser = firebase.auth().currentUser;
 
-                    // if new user record is created successfully
-                    if(user) {
-                        // fetch user data
-                        const cUser = firebase.auth().currentUser;
-
-                        // set username as form input username
-                        cUser.updateProfile({
-                            displayName: this.username
-                        });
-                        // make new user document in firestore
-                        db.collection('users').doc(cUser.uid).set({
-                            userId: cUser.uid,
-                            username: this.username,
-                            bio: 'My Bio',
-                            isAdmin: false
-                        });
-                        // move views
-                        this.$router.replace({ name: 'Profile' });
-                    }
-                }).catch(function(error) {
-                    // if errors occur
-                    console.log(error);
-                });
+                            // set username as form input username
+                            cUser.updateProfile({
+                                displayName: this.username
+                            });
+                            // make new user document in firestore
+                            db.collection('users').doc(cUser.uid).set({
+                                userId: cUser.uid,
+                                username: this.username,
+                                bio: 'My Bio',
+                                isAdmin: false,
+                                picture: this.standard,
+                            });
+                            // move views
+                            this.$router.replace({ name: 'Home' });
+                        }
+                    }).catch(function(error) {
+                        // if errors occur
+                        console.log(error);
+                    });
+                }
                 
                 /*
                 try {

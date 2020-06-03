@@ -34,8 +34,8 @@ export default new Vuex.Store({
         state.user = {};
         return;
       }
-        const {username, bio, isAdmin} = res;
-        state.user = {username, bio, isAdmin}
+        const {username, bio, isAdmin, picture} = res;
+        state.user = {username, bio, isAdmin, picture}
     }
   },
   actions: {

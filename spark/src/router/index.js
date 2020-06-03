@@ -5,6 +5,7 @@ import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import Authtest from '../views/Auth/Authtest.vue'
 import Profile from '../views/Auth/Profile.vue'
+import Edit from '../views/Auth/Edit.vue'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -36,8 +37,15 @@ Vue.use(VueRouter)
   },
   {
     path: '/profile',
-    name: 'My Profile',
+    name: 'Profile',
     component: Profile,
+    // routeguard data
+    meta: { Authenticated: true }
+  },
+  {
+    path: '/edit',
+    name: 'Edit',
+    component: Edit,
     // routeguard data
     meta: { Authenticated: true }
   },

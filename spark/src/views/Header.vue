@@ -41,12 +41,12 @@ import Authlog from '../components/Testwidgets/Authlog';
             firebase.auth().onAuthStateChanged(user=> {
                 if (user) {
                     this.loggedIn = true;
+                    this.$store.dispatch('fetchUserData');
                 }
                 else {
                     this.loggedIn = false;
                 }
             });
-            this.$store.dispatch('fetchUserData');
         },
         computed: {
             user () {
