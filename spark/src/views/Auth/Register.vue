@@ -58,7 +58,7 @@ import {db} from '../../main';
                             isAdmin: false
                         });
                         // move views
-                        this.$router.replace({ name: 'Authtest' });
+                        this.$router.replace({ name: 'Profile' });
                     }
                 }).catch(function(error) {
                     // if errors occur

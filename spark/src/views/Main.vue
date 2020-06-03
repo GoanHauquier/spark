@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper"> <!-- Main wrapper -->
         <div class="top-wrapper"> <!-- Top wrapper -->
-            <Header v-bind:cUserData="cUserData" />
+            <Header />
             <router-view />
         </div>
         <Footer />
@@ -34,23 +34,25 @@ import Footer from './Footer';
             }
         },
         created () {
+            
             // fetch user data
             const user = firebase.auth().currentUser;
-            this.id = user.uid;
-            this.id = this.id.toString();
+            if (user) {
+                this.id = user.uid;
+                this.id = this.id.toString();
 
-            // fetch user data from firestore
-            db.collection('users')
-            .doc(this.id)
-            .get()
-            .then(snapshot => {
-                const document = snapshot.data()
-                // set the userdata object to the current firestore data
-                this.cUserData.cUsername = document.username;
-                this.cUserData.cBio = document.bio;
-                this.cUserData.cIsAdmin = document.isAdmin;
-                console.log('User Data', this.cUserData)
-            })
+                // fetch user data from firestore
+                db.collection('users')
+                .doc(this.id)
+                .get()
+                .then(snapshot => {
+                    const document = snapshot.data()
+                    // set the userdata object to the current firestore data
+                    this.cUserData.cUsername = document.username;
+                    this.cUserData.cBio = document.bio;
+                    this.cUserData.cIsAdmin = document.isAdmin;
+                })
+            }
         },
     }
 </script>

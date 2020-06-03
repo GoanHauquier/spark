@@ -49,7 +49,7 @@ import {db} from '../../main';
         },
         methods: {
             editBio() {
-                this.$forceUpdate();
+                
                 // set variable equal to user input
                 const newBio = this.$refs.bioInput.value;
                 console.log(newBio);

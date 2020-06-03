@@ -1,19 +1,21 @@
 <template>
-    <div>
-        <div class="text-left">
-            SPARK
+    <div class="row">
+        <div class="text-left col-6">
+            <router-link to="/">
+                <h3 class="home-title">SPARK</h3>
+            </router-link>
         </div>
-        <div class="text-right">
-            <router-link to="/">Home</router-link> |
+        <div class="text-right col-6">
             <router-link to="/about">About</router-link> |
-            <span v-if="!user">
+            <span v-if="!loggedIn">
                 <router-link to="/login">Login</router-link> |
                 <router-link to="/register">Register</router-link> |
             </span>
             <span v-else>
-                <button @click="dropdown()" class="dropbtn">{{ cUserData.cUsername }}</button>
+                <button @click="dropdown()" class="dropbtn">{{ user.username }}</button>
                 <div id="myDropdown" class="dropdown-content">
-                    <router-link to="/test">Profile</router-link>
+                    <router-link to="/profile">Profile</router-link>
+                    <Authlog />
                 </div>
             </span>
         </div>
@@ -24,22 +26,31 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
+import Authlog from '../components/Testwidgets/Authlog';
+
     export default {
-        props: [
-            'cUserData'
-        ],
+        components: {
+            Authlog,
+        },
         data() {
             return {
-                user: false
+                loggedIn: false
             }
         },
         created () {
-            const user = firebase.auth().currentUser;
-            if (user) {
-                this.user = true;
-            }
-            else {
-                this.user = false;
+            firebase.auth().onAuthStateChanged(user=> {
+                if (user) {
+                    this.loggedIn = true;
+                }
+                else {
+                    this.loggedIn = false;
+                }
+            });
+            this.$store.dispatch('fetchUserData');
+        },
+        computed: {
+            user () {
+                return this.$store.getters.user;
             }
         },
         methods: {

@@ -1,7 +1,5 @@
 <template>
     <div>
-        <span v-if="loggedIn">Logged in </span>
-        <span v-else>Logged out</span>
         <button @click='signOut'>Sign out</button>
     </div>
 </template>
@@ -24,6 +22,8 @@ import 'firebase/firestore';
                     const data = await firebase.auth().signOut();
                     console.log('signed out', data);
                     this.$router.replace({name: 'Login'});
+                    
+
                 }
                 catch(err) {
                     console.log(err);

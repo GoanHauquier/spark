@@ -29,6 +29,7 @@ import 'firebase/auth';
                 error: '',
             }
         },
+        
         methods: {
             async onSubmit() {
                 try {
@@ -36,7 +37,7 @@ import 'firebase/auth';
                     const val = await firebase.auth().signInWithEmailAndPassword(this.email, this.password);
                     console.log(val);
                     // move views
-                    this.$router.replace({ name: 'Authtest' });
+                    this.$router.replace({ name: 'Home' });
                 }
                 catch(err) {
                     console.log(err);
