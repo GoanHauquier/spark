@@ -66,6 +66,10 @@ import {db} from '../../main';
                                 isAdmin: false,
                                 picture: this.standard,
                             });
+                            // make new matches document in firestore for user
+                            db.collection('matches').doc(cUser.uid).set({
+                                matches: []
+                            });
                             // move views
                             this.$router.replace({ name: 'Home' });
                         }

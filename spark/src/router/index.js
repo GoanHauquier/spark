@@ -6,6 +6,7 @@ import Register from '../views/Auth/Register.vue'
 import Authtest from '../views/Auth/Authtest.vue'
 import Profile from '../views/Auth/Profile.vue'
 import Edit from '../views/Auth/Edit.vue'
+import Matching from '../views/matching/Matching.vue'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -53,6 +54,13 @@ Vue.use(VueRouter)
     path: '/test',
     name: 'Authtest',
     component: Authtest,
+    // routeguard data
+    meta: { Authenticated: true }
+  },
+  {
+    path: '/spark',
+    name: 'Matching',
+    component: Matching,
     // routeguard data
     meta: { Authenticated: true }
   },

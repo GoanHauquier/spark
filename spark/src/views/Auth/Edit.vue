@@ -6,6 +6,7 @@
             Bio: 
             <input type="text" :value="cUserData.cBio" ref="bioInput">
             <br>
+            <img :src="cUserData.cPicture" ref="myImg"><br>
             <input type="file" @change="getFile()" ref="myFile">
             <button v-show="hasFile" @click="editPicture()">Save img</button>
             <br>
@@ -33,13 +34,13 @@ import {db} from '../../main';
                 },
                 file: {},
                 hasFile: false,
-                
+                user: {}
             }
         },
         created () {
             // fetch user data
-            const user = firebase.auth().currentUser;
-            this.id = user.uid;
+            this.user = firebase.auth().currentUser;
+            this.id = this.user.uid;
             this.id = this.id.toString();
 
             // fetch user data from firestore
@@ -52,6 +53,7 @@ import {db} from '../../main';
                 this.cUserData.cUsername = document.username;
                 this.cUserData.cBio = document.bio;
                 this.cUserData.cIsAdmin = document.isAdmin;
+                this.cUserData.cPicture = document.picture;
             })
         },
         methods: {
@@ -61,10 +63,10 @@ import {db} from '../../main';
                 this.hasFile = true;
             },
             editPicture() {
-                const user = firebase.auth().currentUser;
+                const user = this.user;
 
                 // make new storage record uniquely for the user and add the uploaded file
-                const storageRef = firebase.storage().ref('users/' + user.uid + '/profile' + Date.now().toString() + '.jpg');
+                const storageRef = firebase.storage().ref('users/' + this.user.uid + '/profile' + Date.now().toString() + '.jpg');
                 console.log(storageRef);
 
                 if (this.file) {
