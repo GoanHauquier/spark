@@ -68,6 +68,7 @@ import {db} from '../../main';
                             });
 
                             db.collection('matches').doc(cUser.uid).collection('myMatches').doc('Activated').set({activated: true});
+                            db.collection('matches').doc(cUser.uid).collection('usersMet').doc(cUser.uid).set({activated: true});
                             // move views
                             this.$router.replace({ name: 'Home' });
                         }

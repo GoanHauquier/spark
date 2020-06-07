@@ -9,6 +9,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user: {},
+    recentUsers: []
   },
   mutations: {
     setUser( state, res ) {
@@ -52,7 +53,15 @@ export default new Vuex.Store({
         // set the userdata object to the current firestore data
         commit('setUser', document);
       })
-    }
+    },
+    // fetchRecentUsers: ({commit}) => {
+    //   const cUser = firebase.auth().currentUser;
+    //   const id = cUser.uid;
+
+    //   var allRecentUsers = firebase.database().ref('status/' + id).orderByValue('last_changed');
+    //   console.log(allRecentUsers);
+
+    // }
   },
   getters: {
     user: (state) => { return state.user },

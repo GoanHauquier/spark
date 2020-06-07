@@ -14,7 +14,8 @@
             <span v-else>
                 <button @click="dropdown()" class="dropbtn">{{ user.username }}</button>
                 <div id="myDropdown" class="dropdown-content">
-                    <router-link to="/profile">Profile</router-link>
+                    <router-link to="/profile">Profile</router-link><br>
+                    <router-link to="/testing">testing</router-link>
                     <Authlog />
                 </div>
             </span>
