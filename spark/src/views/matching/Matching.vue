@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import * as firebase from 'firebase/app';
+import'firebase/database';
 import 'firebase/firestore';
 import {db} from '../../main';
 
@@ -65,36 +67,41 @@ import {db} from '../../main';
                 .collection('usersMet')
                 .doc(this.potentialMatches[this.counter].id)
                 .set({
-                    pending: 0,
+                    activated: true,
                 }).then(this.next());
             },
             likeUser() {
-                db.collection('matches')
-                .doc(this.potentialMatches[this.counter].id)
-                .collection('myMatches')
-                .where("id", "==", this.user.userId)
-                .set({
-                    // pending:
-                    // 0: sent
-                    // 1: accepted
-                    // 2 blocked
-                    pending: 1,
+                firebase.database().ref('status/' + this.potentialMatches[this.counter].id + '/pending/' + this.user.userId).once('value', snapshot => {
+                    if (snapshot.val() == null) {
+                        console.log('doesnt exist');
+                        firebase.database()
+                        .ref('status/' + this.user.userId + '/pending/' + this.potentialMatches[this.counter].id)
+                        .set({
+                            pending: 1
+                        });
+                        this.addUserToDB();
+                    }
+                    else {
+                        console.log('exists');
+                        // add every user to the usersMet table in the db
+                        db.collection("matches")
+                        .doc(this.user.userId)
+                        .collection('myMatches')
+                        .doc(this.potentialMatches[this.counter].id)
+                        .set({
+                            match: 1,
+                        });
+                        db.collection("matches")
+                        .doc(this.potentialMatches[this.counter].id)
+                        .collection('myMatches')
+                        .doc(this.user.userId)
+                        .set({
+                            match: 1,
+                        });
+                        this.addUserToDB();
+                    }
+                    
                 })
-                // add every user to the usersMet table in the db
-                db.collection("matches")
-                .doc(this.user.userId)
-                .collection('myMatches')
-                .doc(this.potentialMatches[this.counter].id)
-                .set({
-                    // pending:
-                    // 0: sent
-                    // 1: accepted
-                    // 2 blocked
-                    pending: 0,
-                    id: this.user.userId
-                }).then(
-                    this.addUserToDB()
-                );
             }
         },
         computed: {
