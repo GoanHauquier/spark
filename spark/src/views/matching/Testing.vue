@@ -1,5 +1,15 @@
 <template>
     <div>
+        <div v-if="started">
+            <Matching
+                :potentialMatches="usersData"
+                :arrayLength="arrayLength"
+                @clicked="emptyArray"
+            /> 
+        </div>  
+        <div v-else>
+            <button @click="getMatches()">Start</button>
+        </div>  
     </div>
 </template>
 
@@ -9,14 +19,24 @@ import'firebase/database';
 import 'firebase/firestore';
 import {db} from '../../main';
 
+import Matching from './Matching';
+
     export default {
+        components: {
+            Matching,
+        },
         data() {
             return {
                 userList: [],
+                usersData: [],
+                started: false,
+                arrayLength: 0
             }
         },
         created () {
             // check for online users
+            
+            this.loading = true;
 
             // Fetch the current user's ID from Firebase Authentication.
             const uid = firebase.auth().currentUser.uid;
@@ -61,44 +81,82 @@ import {db} from '../../main';
                     // server will mark us as offline once we lose connection.
                     userStatusDatabaseRef.set(isOnlineForDatabase);
                 });
-            });
+            });    
+        },
+        methods: {
+            getMatches() {
+                const uid = firebase.auth().currentUser.uid;
+                // get users from database based on when they last logged in
+                firebase.database().ref('status').orderByChild('last_changed').limitToLast(50).once('value', snapshot => {
+                    // initialize 2 arrays
+                    // const userList = [];
+                    const metUsers = [];
 
-            
-            firebase.database().ref('status').orderByChild('last_changed').once('value', function(snapshot) {
-                const userList = [];
-                const metUsers = [];
-                // const listLength = snapshot.val().length;
+                        console.log('looking for potential matches');
+                        // fill array with id's of users you've already met from firestore
+                        db.collection('matches')
+                        .doc(uid)
+                        .collection('usersMet')
+                        .get()
+                        .then( snap => {
+                            snap.forEach(el => {
+                                metUsers.push(el.id);
+                            });
 
-                    db.collection('matches')
-                    .doc(uid)
-                    .collection('usersMet')
-                    .get()
-                    .then(snap => {
-                        snap.forEach(el => {
-                            metUsers.push(el.id);
-                        });
-                    })
-                    
-                    snapshot.forEach(el => {
-                        if (!metUsers.includes(el.val().id) && el.val().id != uid) {
-                            if (userList.length != 5) {
-                                userList.push(el.val().id);
+                            console.log('filling list');
+                            // fill array with users you've not met based on the previous array
+                            snapshot.forEach(el => {
+                            if (metUsers.includes(el.val().id) || el.val().id == uid) {
+                                console.log('user met');
                             }
                             else {
-                                return userList;
+                                if (this.userList.length != 5) {
+                                    this.userList.push(el.val().id);
+                                }
+                                else {
+                                    return this.userList;
+                                }
                             }
-                        }
-                        else {
-                            console.log(el.val().id, 'alreay met');
-                        } 
-                    });
-                    console.log('users met', metUsers);
-                    console.log('new users', userList);
-            })
+                        });
+                        console.log('getting users data');
+                        // fill a new array with data objects from the selected users
+                        this.userList.forEach(doc => {
+                            db.collection('users')
+                            .doc(doc)
+                            .get()
+                            .then(el => {
+                                const document = el.data();
+                                this.usersData.push({
+                                    id: document.userId,
+                                    username: document.username,
+                                    bio: document.bio
+                                })
+                            })
+                        });
+                        // set variable to length of the array
+                        this.arrayLength = this.userList.length;
+                        console.log('data pending');
+                        console.log('userList', this.userList);
+                        console.log('usersData', this.usersData);
+                        console.log(this.arrayLength);
+                        
+                    })
+                })
+                // start the matching process
+                this.started = true;
+            },
+            emptyArray() {
+                this.started = false;
+                // empty the arrays
+                this.userList = [];
+                this.usersData = [];
+                
+                // when the arrays are empty refire the getMatches() function
+                if (this.userList.length == 0  && this.usersData.length == 0) {
+                    console.log('array emptied');
+                    this.getMatches();
+                }
+            }
         },
     }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

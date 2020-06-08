@@ -1,107 +1,56 @@
 <template>
     <div>
-        <button v-if="users[0].id != user.uid" @click="sendRequest(users[0].id)">{{ users[0].id }}</button>
-        <button v-else @click="sendRequest(users[1].id)">{{ users[1].id }}</button>
+        <div v-if="potentialMatches.length > 0 && !arrayEmpty">
+            <h3>{{ potentialMatches[counter].username }}</h3>
+            <button @click="next()">Next</button>
+        </div>
+        <div v-else-if="potentialMatches.length == 0 || arrayEmpty">
+            loading
+        </div>
     </div>
 </template>
 
 <script>
-import * as firebase from 'firebase/app';
-import 'firebase/firestore';
-import {db} from '../../main'; 
-
     export default {
         data() {
             return {
-                users: [0],
-                user: {},
+                count: 0,
+                counter: 0,
+                userList: [],
+                arrayEmpty: false,
             }
         },
-        created() {
-            const user = firebase.auth().currentUser;
-            this.user = user;
-
-            if (this.users) {
-                db.collection('users')
-                .limit(2)
-                .get()
-                .then((snapshot) => {
-                    // this.users = snapshot.docs;
-                    const res = snapshot.docs;
-                    this.users.forEach(res => {
-                        snapshot.docs.push(res);
-                    });
-                    this.users = res;
-                })
+        props: [
+            'potentialMatches',
+            'arrayLength'
+        ],
+        watch: {
+            potentialMatches() {
+                // wait for entire array to arrive in this component
+                if (this.potentialMatches.length == this.arrayLength) {
+                    this.arrayEmpty = false;
+                }
             }
-            else {
-                console.log('ayy');
-            }
+        },
+        created () {
         },
         methods: {
-            sendRequest(id) {
-                console.log('pressed', id);
-
-                if (id) {
-                    firebase.firestore()
-                    .collection('matches')
-                    .doc(this.user.uid)
-                    .collection('myMatches')
-                    .doc(id)
-                    .get()
-                    .then((snapshot) => {
-                        const data = snapshot.data();
-                        console.log('data', data);
-
-                        if (!data) {
-                            firebase.firestore()
-                            .collection('matches')
-                            .doc(this.user.uid)
-                            .collection('myMatches')
-                            .doc(id)
-                            .set(
-                                { matchIdentifier: id, matched: null, sent: true },
-                            )
-                        }
-                        else if (data.matchIdentifier != id) {
-                            firebase.firestore()
-                            .collection('matches')
-                            .doc(this.user.uid)
-                            .collection('myMatches')
-                            .doc(id)
-                            .set(
-                                { matchIdentifier: id, matched: null, sent: true },
-                            )
-                            console.log('ayy');
-                        }
-                        else if (data.matchIdentifier == id) {
-                            firebase.firestore()
-                            .collection('matches')
-                            .doc(this.user.uid)
-                            .collection('myMatches')
-                            .doc(id)
-                            .set(
-                                { matchIdentifier: id, matched: true, sent: true },
-                            ),
-                            firebase.firestore()
-                            .collection('matches')
-                            .doc(id)
-                            .collection('myMatches')
-                            .doc(this.user.uid)
-                            .set(
-                                { matchIdentifier: this.user.uid, matched: true, sent: true },
-                            )
-                            console.log('yeet');
-                        }
-                        else {
-                            console.log('error');
-                        }
-                    })
-                    
+            next() {
+                // check if counter is equal to the length of the array
+                if (this.counter == this.potentialMatches.length-1) {
+                    // if yes, fire the reload() function
+                    this.arrayEmpty = true;
+                    this.reload();
                 }
                 else {
-                    console.log('error bij match');
+                    // if not, counter + 1
+                    this.counter++
                 }
+            },
+            reload() {
+                // set counter to 0 and emit the event to parent component
+                this.counter = 0;
+                this.$emit('clicked', 'reload');
             }
         },
     }
