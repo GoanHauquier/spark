@@ -2,15 +2,22 @@
     <div>
         <div v-if="potentialMatches.length > 0 && !arrayEmpty">
             <h3>{{ potentialMatches[counter].username }}</h3>
-            <button @click="next()">Next</button>
+            <button @click="likeUser()">Like</button>
+            <button @click="addUserToDB()">Next</button>
         </div>
-        <div v-else-if="potentialMatches.length == 0 || arrayEmpty">
+        <div v-else-if="(potentialMatches.length == 0 || arrayEmpty) && !noUsers">
             loading
+        </div>
+        <div v-else-if="noUsers">
+            No more users in the queue, please come back later...
         </div>
     </div>
 </template>
 
 <script>
+import 'firebase/firestore';
+import {db} from '../../main';
+
     export default {
         data() {
             return {
@@ -22,7 +29,8 @@
         },
         props: [
             'potentialMatches',
-            'arrayLength'
+            'arrayLength',
+            'noUsers'
         ],
         watch: {
             potentialMatches() {
@@ -30,9 +38,7 @@
                 if (this.potentialMatches.length == this.arrayLength) {
                     this.arrayEmpty = false;
                 }
-            }
-        },
-        created () {
+            },
         },
         methods: {
             next() {
@@ -44,14 +50,60 @@
                 }
                 else {
                     // if not, counter + 1
-                    this.counter++
+                    this.counter++;
                 }
             },
             reload() {
                 // set counter to 0 and emit the event to parent component
                 this.counter = 0;
                 this.$emit('clicked', 'reload');
+            },
+            addUserToDB() {
+                // add every user to the usersMet table in the db
+                db.collection("matches")
+                .doc(this.user.userId)
+                .collection('usersMet')
+                .doc(this.potentialMatches[this.counter].id)
+                .set({
+                    pending: 0,
+                }).then(this.next());
+            },
+            likeUser() {
+                db.collection('matches')
+                .doc(this.potentialMatches[this.counter].id)
+                .collection('myMatches')
+                .where("id", "==", this.user.userId)
+                .set({
+                    // pending:
+                    // 0: sent
+                    // 1: accepted
+                    // 2 blocked
+                    pending: 1,
+                })
+                // add every user to the usersMet table in the db
+                db.collection("matches")
+                .doc(this.user.userId)
+                .collection('myMatches')
+                .doc(this.potentialMatches[this.counter].id)
+                .set({
+                    // pending:
+                    // 0: sent
+                    // 1: accepted
+                    // 2 blocked
+                    pending: 0,
+                    id: this.user.userId
+                }).then(
+                    this.addUserToDB()
+                );
             }
+        },
+        computed: {
+            user () {
+                return this.$store.getters.user;
+            }
+        },
+        created () {
+            this.$store.dispatch('fetchUserData');
         },
     }
 </script>

@@ -35,8 +35,8 @@ export default new Vuex.Store({
         state.user = {};
         return;
       }
-        const {username, bio, isAdmin, picture} = res;
-        state.user = {username, bio, isAdmin, picture}
+        const {username, bio, isAdmin, picture, userId} = res;
+        state.user = {username, bio, isAdmin, picture, userId}
     }
   },
   actions: {
@@ -54,14 +54,6 @@ export default new Vuex.Store({
         commit('setUser', document);
       })
     },
-    // fetchRecentUsers: ({commit}) => {
-    //   const cUser = firebase.auth().currentUser;
-    //   const id = cUser.uid;
-
-    //   var allRecentUsers = firebase.database().ref('status/' + id).orderByValue('last_changed');
-    //   console.log(allRecentUsers);
-
-    // }
   },
   getters: {
     user: (state) => { return state.user },

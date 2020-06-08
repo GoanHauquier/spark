@@ -8,6 +8,8 @@ import { firestorePlugin } from 'vuefire'
 import { BootstrapVue } from 'bootstrap-vue'
 import './assets/scss/application.scss';
 
+import config from './config'
+
 Vue.use(firestorePlugin)
 Vue.use(BootstrapVue)
 
@@ -16,14 +18,14 @@ Vue.config.productionTip = false
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCfH_x4DL7ipsEZ0s1qIeJ1aI7df_5ZHvE",
-  authDomain: "spark-a6f3f.firebaseapp.com",
-  databaseURL: "https://spark-a6f3f.firebaseio.com",
-  projectId: "spark-a6f3f",
-  storageBucket: "spark-a6f3f.appspot.com",
-  messagingSenderId: "123726967246",
-  appId: "1:123726967246:web:aa634ede9a1e98651c7b9f",
-  measurementId: "G-BC683SF45H"
+  apiKey: config.firebase.apiKey,
+  authDomain: config.firebase.authDomain,
+  databaseURL: config.firebase.databaseURL,
+  projectId: config.firebase.projectId,
+  storageBucket: config.firebase.storageBucket,
+  messagingSenderId: config.firebase.messagingSenderId,
+  appId: config.firebase.appId,
+  measurementId: config.firebase.measurementId
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)

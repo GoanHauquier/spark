@@ -48,7 +48,7 @@ import {db} from '../../main';
                 const passwordValidation = this.$refs.passwordval.value;
                 if (passwordValidation == this.password) {
                     // make a new user record in firebase Auth()
-                    firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then((user)=> {
+                    firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then((user) => {
                         // if new user record is created successfully
                         if(user) {
                             // fetch user data
