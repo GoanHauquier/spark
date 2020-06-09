@@ -14,7 +14,7 @@
             <span v-else>
                 <div id="myDropdown" class="dropdown-content">
                     <router-link to="/profile">{{ user.username }}</router-link><br>
-                    <router-link to="/testing">testing</router-link>
+                    <router-link v-show="user.audio" to="/spark">Spark Queue</router-link>
                     <Authlog />
                 </div>
             </span>

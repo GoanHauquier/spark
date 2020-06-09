@@ -146,7 +146,8 @@ import Matching from './Matching';
                                 this.usersData.push({
                                     id: document.userId,
                                     username: document.username,
-                                    bio: document.bio
+                                    bio: document.bio,
+                                    audio: document.audio
                                 })
                             })
                         });

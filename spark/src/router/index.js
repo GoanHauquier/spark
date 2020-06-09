@@ -60,14 +60,14 @@ Vue.use(VueRouter)
     meta: { Authenticated: true }
   },
   {
-    path: '/spark',
+    path: '/test',
     name: 'Matching',
     component: Matching,
     // routeguard data
     meta: { Authenticated: true }
   },
   {
-    path: '/testing',
+    path: '/spark',
     name: 'Testing',
     component: Testing,
     // routeguard data

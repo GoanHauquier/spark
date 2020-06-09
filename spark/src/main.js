@@ -7,9 +7,11 @@ import firebase from 'firebase/app'
 import { firestorePlugin } from 'vuefire'
 import { BootstrapVue } from 'bootstrap-vue'
 import './assets/scss/application.scss';
+import VueAudio from 'vue-audio-better'
 
 import config from './config'
 
+Vue.use(VueAudio)
 Vue.use(firestorePlugin)
 Vue.use(BootstrapVue)
 

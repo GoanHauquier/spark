@@ -6,9 +6,15 @@
             Bio: 
             <input type="text" :value="cUserData.cBio" ref="bioInput">
             <br>
+            <input type="text" :value="cUserData.cBio" ref="bioInput"><br>
+            <input type="text" :value="cUserData.cBio" ref="bioInput"><br>
+            <input type="text" :value="cUserData.cBio" ref="bioInput"><br>
             <img :src="cUserData.cPicture" ref="myImg"><br>
             <input type="file" @change="getFile()" ref="myFile">
             <button v-show="hasFile" @click="editPicture()">Save img</button>
+            <br>
+            <input type="file" @change="getAudio()" ref="myAudio">
+            <button v-show="hasAudio" @click="editAudio()">Save img</button>
             <br>
             <button @click="editProfile()">Save</button>
             <button><router-link to='/profile'>Cancel</router-link></button>
@@ -31,9 +37,17 @@ import {db} from '../../main';
                     cBio: '',
                     cPicture: '',
                     cIsAdmin: null,
+                    links: {
+                        previewId: '',
+                        soundcloud: '',
+                        youtube: '',
+                        facebook: '',
+                    }
                 },
                 file: {},
                 hasFile: false,
+                audio: {},
+                hasAudio: false,
                 user: {}
             }
         },
@@ -62,6 +76,11 @@ import {db} from '../../main';
                 this.file = this.$refs.myFile.files[0];
                 this.hasFile = true;
             },
+            getAudio() {
+                // get the uploaded file
+                this.audio = this.$refs.myAudio.files[0];
+                this.hasAudio = true;
+            },
             editPicture() {
                 const user = this.user;
 
@@ -82,6 +101,30 @@ import {db} from '../../main';
                             }); 
                         })
                     });
+                    this.hasFile = false;
+                }
+            },
+            editAudio() {
+                const user = this.user;
+
+                // make new storage record uniquely for the user and add the uploaded file
+                const storageRef = firebase.storage().ref('audio/' + this.user.uid + '/audio.mp3');
+                console.log(storageRef);
+
+                if (this.audio) {
+                    // create new path in storage
+                    storageRef.put(this.audio).then(function() {
+                        const id = user.uid;
+                        console.log('Uploaded!');
+                        storageRef.getDownloadURL().then(audioURL => {
+                            console.log(audioURL);
+                            // set firestore data equal to new data
+                            db.collection("users").doc(id).update({
+                                audio: audioURL,
+                            }); 
+                        })
+                    });
+                    this.hasAudio = false;
                 }
             },
             editProfile() {

@@ -2,6 +2,10 @@
     <div>
         <div v-if="potentialMatches.length > 0 && !arrayEmpty">
             <h3>{{ potentialMatches[counter].username }}</h3>
+            <vue-audio
+                :src="potentialMatches[counter].audio"
+            >
+            </vue-audio>
             <button @click="likeUser()">Like</button>
             <button @click="addUserToDB()">Next</button>
         </div>
