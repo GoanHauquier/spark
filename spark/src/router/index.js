@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import Authtest from '../views/Auth/Authtest.vue'
+import Friendpage from '../views/Auth/Friendpage.vue'
 import Profile from '../views/Auth/Profile.vue'
 import Edit from '../views/Auth/Edit.vue'
 import Matching from '../views/matching/Matching.vue'
@@ -69,6 +70,13 @@ Vue.use(VueRouter)
     path: '/testing',
     name: 'Testing',
     component: Testing,
+    // routeguard data
+    meta: { Authenticated: true }
+  },
+  {
+    path: '/profile/:id',
+    name: 'Friend',
+    component: Friendpage,
     // routeguard data
     meta: { Authenticated: true }
   },

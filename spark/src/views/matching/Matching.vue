@@ -27,6 +27,7 @@ import {db} from '../../main';
                 counter: 0,
                 userList: [],
                 arrayEmpty: false,
+                id: ''
             }
         },
         props: [
@@ -63,7 +64,7 @@ import {db} from '../../main';
             addUserToDB() {
                 // add every user to the usersMet table in the db
                 db.collection("matches")
-                .doc(this.user.userId)
+                .doc(this.id)
                 .collection('usersMet')
                 .doc(this.potentialMatches[this.counter].id)
                 .set({
@@ -71,36 +72,39 @@ import {db} from '../../main';
                 }).then(this.next());
             },
             likeUser() {
-                firebase.database().ref('status/' + this.potentialMatches[this.counter].id + '/pending/' + this.user.userId).once('value', snapshot => {
+                firebase.database().ref('status/' + this.potentialMatches[this.counter].id + '/pending/' + this.id).once('value', snapshot => {
+                    
                     if (snapshot.val() == null) {
                         console.log('doesnt exist');
                         firebase.database()
-                        .ref('status/' + this.user.userId + '/pending/' + this.potentialMatches[this.counter].id)
+                        .ref('status/' + this.id + '/pending/' + this.potentialMatches[this.counter].id)
                         .set({
                             pending: 1
                         });
                         this.addUserToDB();
                     }
                     else {
-                        console.log('exists');
                         // add every user to the usersMet table in the db
                         db.collection("matches")
-                        .doc(this.user.userId)
+                        .doc(this.id)
                         .collection('myMatches')
                         .doc(this.potentialMatches[this.counter].id)
                         .set({
                             match: 1,
+                            name: this.potentialMatches[this.counter].username,
+                            id: this.potentialMatches[this.counter].id
                         });
                         db.collection("matches")
                         .doc(this.potentialMatches[this.counter].id)
                         .collection('myMatches')
-                        .doc(this.user.userId)
+                        .doc(this.id)
                         .set({
                             match: 1,
+                            name: this.user.username,
+                            id: this.id
                         });
                         this.addUserToDB();
-                    }
-                    
+                    }   
                 })
             }
         },
@@ -111,6 +115,7 @@ import {db} from '../../main';
         },
         created () {
             this.$store.dispatch('fetchUserData');
+            this.id = firebase.auth().currentUser.uid;
         },
     }
 </script>

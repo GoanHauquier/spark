@@ -1,33 +1,21 @@
 <template>
     <div>
-        <div>
-            <img :src="user.picture"><br>
-            {{ user.username }} <br>
-            {{ user.bio }} <br>
-            <div v-if="user.isAdmin == false">You're not an admin</div>
-            <div v-else>Welcome admin</div>
-            <button><router-link to='/edit'>Edit profile</router-link></button>
+        <div v-for="match in myMatches" :key="match.id">
+            <router-link :to="'profile/' + match.id">{{ match.name }}</router-link>
         </div>
-        <Friends />
     </div>
 </template>
 
 <script>
 import * as firebase from 'firebase/app';
-import'firebase/database';
 import 'firebase/firestore';
-import {db} from '../../main';
-
-import Friends from '../../components/Friends';
+import {db} from '../main';
 
     export default {
         data() {
             return {
                 myMatches: []
             }
-        },
-        components: {
-            Friends
         },
         created () {
             this.$store.dispatch('fetchUserData');
@@ -55,3 +43,7 @@ import Friends from '../../components/Friends';
         },
     }
 </script>
+
+<style lang="scss" scoped>
+
+</style>

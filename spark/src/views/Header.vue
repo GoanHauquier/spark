@@ -12,9 +12,8 @@
                 <router-link to="/register">Register</router-link> |
             </span>
             <span v-else>
-                <button @click="dropdown()" class="dropbtn">{{ user.username }}</button>
                 <div id="myDropdown" class="dropdown-content">
-                    <router-link to="/profile">Profile</router-link><br>
+                    <router-link to="/profile">{{ user.username }}</router-link><br>
                     <router-link to="/testing">testing</router-link>
                     <Authlog />
                 </div>
@@ -26,6 +25,7 @@
 <script>
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import'firebase/database';
 
 import Authlog from '../components/Testwidgets/Authlog';
 
@@ -35,10 +35,11 @@ import Authlog from '../components/Testwidgets/Authlog';
         },
         data() {
             return {
-                loggedIn: false
+                loggedIn: false,
             }
         },
         created () {
+            // const id = firebase.auth().currentUser.uid;
             firebase.auth().onAuthStateChanged(user=> {
                 if (user) {
                     this.loggedIn = true;
@@ -48,6 +49,15 @@ import Authlog from '../components/Testwidgets/Authlog';
                     this.loggedIn = false;
                 }
             });
+            // new match = set notification to true in realtime database
+            // firebase.database().ref('status/' + id).on('value', snapshot => {
+            //     if (!snapshot.val().notification) {
+            //         this.profileButton = 'Profile';
+            //     }
+            //     else {
+            //         this.profileButton = 'Profile*';
+            //     }
+            // });
         },
         computed: {
             user () {
@@ -57,7 +67,7 @@ import Authlog from '../components/Testwidgets/Authlog';
         methods: {
             dropdown() {
                 console.log('pressed');
-            }
+            },
         },
     }
 </script>

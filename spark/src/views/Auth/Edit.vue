@@ -48,7 +48,7 @@ import {db} from '../../main';
             .doc(this.id)
             .get()
             .then(snapshot => {
-                const document = snapshot.data()
+                const document = snapshot.data();
                 // set the userdata object to the current firestore data
                 this.cUserData.cUsername = document.username;
                 this.cUserData.cBio = document.bio;

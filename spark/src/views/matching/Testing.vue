@@ -51,15 +51,27 @@ import Matching from './Matching';
             const isOfflineForDatabase = {
                 state: 'offline',
                 last_changed: firebase.database.ServerValue.TIMESTAMP,
-                id: uid
             };
 
             const isOnlineForDatabase = {
                 state: 'online',
                 last_changed: firebase.database.ServerValue.TIMESTAMP,
-                id: uid
             };
 
+            const setData = {
+                id: uid,
+            }
+
+            userStatusDatabaseRef.update(setData);
+
+            firebase.database().ref('status').once('value', snapshot => {
+                snapshot.forEach(el => {
+                    if (el.val().id == undefined) {
+                        console.log(el);
+                        firebase.database().ref('status/' + el.key).remove();
+                    }
+                })
+            });
             // Create a reference to the special '.info/connected' path in 
             // Realtime Database. This path returns `true` when connected
             // and `false` when disconnected.
@@ -73,13 +85,13 @@ import Matching from './Matching';
                 // method to add a set which will only trigger once this 
                 // client has disconnected by closing the app, 
                 // losing internet, or any other means.
-                userStatusDatabaseRef.onDisconnect().set(isOfflineForDatabase).then(function() {
+                userStatusDatabaseRef.onDisconnect().update(isOfflineForDatabase).then(function() {
                     // The promise returned from .onDisconnect().set() will
                     // resolve as soon as the server acknowledges the onDisconnect() 
 
                     // We can now safely set ourselves as 'online' knowing that the
                     // server will mark us as offline once we lose connection.
-                    userStatusDatabaseRef.set(isOnlineForDatabase);
+                    userStatusDatabaseRef.update(isOnlineForDatabase);
                 });
             });
         },
@@ -121,8 +133,7 @@ import Matching from './Matching';
                                 }
                             }
                         });
-                        console.log(this.userList);
-                        console.log('getting users data');
+                        console.log('getting users data', this.userList);
 
                         // fill a new array with data objects from the selected users
                         this.userList.forEach(doc => {
@@ -131,6 +142,7 @@ import Matching from './Matching';
                             .get()
                             .then(el => {
                                 const document = el.data();
+                                console.log('test', document);
                                 this.usersData.push({
                                     id: document.userId,
                                     username: document.username,
