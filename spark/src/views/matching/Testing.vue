@@ -142,7 +142,6 @@ import Matching from './Matching';
                             .get()
                             .then(el => {
                                 const document = el.data();
-                                console.log('test', document);
                                 this.usersData.push({
                                     id: document.userId,
                                     username: document.username,

@@ -2,10 +2,12 @@
     <div>
         <div v-if="potentialMatches.length > 0 && !arrayEmpty">
             <h3>{{ potentialMatches[counter].username }}</h3>
-            <vue-audio
+            <mini-audio      
+                
+                :html5="true"
                 :src="potentialMatches[counter].audio"
             >
-            </vue-audio>
+            </mini-audio>
             <button @click="likeUser()">Like</button>
             <button @click="addUserToDB()">Next</button>
         </div>
@@ -31,7 +33,8 @@ import {db} from '../../main';
                 counter: 0,
                 userList: [],
                 arrayEmpty: false,
-                id: ''
+                id: '',
+                audioState: 'paused'
             }
         },
         props: [
@@ -110,7 +113,7 @@ import {db} from '../../main';
                         this.addUserToDB();
                     }   
                 })
-            }
+            },
         },
         computed: {
             user () {

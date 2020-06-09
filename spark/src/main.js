@@ -11,6 +11,7 @@ import VueAudio from 'vue-audio-better'
 
 import config from './config'
 
+
 Vue.use(VueAudio)
 Vue.use(firestorePlugin)
 Vue.use(BootstrapVue)
@@ -31,6 +32,7 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
+
 export const db = firebase
   .firestore()
 // firebase.analytics();
