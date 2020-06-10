@@ -82,7 +82,6 @@ import {db} from '../../main';
                 firebase.database().ref('status/' + this.potentialMatches[this.counter].id + '/pending/' + this.id).once('value', snapshot => {
                     
                     if (snapshot.val() == null) {
-                        console.log('doesnt exist');
                         firebase.database()
                         .ref('status/' + this.id + '/pending/' + this.potentialMatches[this.counter].id)
                         .set({
@@ -91,7 +90,7 @@ import {db} from '../../main';
                         this.addUserToDB();
                     }
                     else {
-                        // add every user to the usersMet table in the db
+                        // add user to my matches table
                         db.collection("matches")
                         .doc(this.id)
                         .collection('myMatches')
@@ -99,8 +98,10 @@ import {db} from '../../main';
                         .set({
                             match: 1,
                             name: this.potentialMatches[this.counter].username,
-                            id: this.potentialMatches[this.counter].id
+                            id: this.potentialMatches[this.counter].id,
+                            date: firebase.database.ServerValue.TIMESTAMP,
                         });
+                        // add me to my matches' matches table
                         db.collection("matches")
                         .doc(this.potentialMatches[this.counter].id)
                         .collection('myMatches')
@@ -108,11 +109,25 @@ import {db} from '../../main';
                         .set({
                             match: 1,
                             name: this.user.username,
-                            id: this.id
+                            id: this.id,
+                            date: firebase.database.ServerValue.TIMESTAMP,
+                        });
+                        // set has notification to true for my profile
+                        firebase.database()
+                        .ref('status/' + this.id)
+                        .update({
+                            hasNotification: true
                         });
                         this.newMatch();
                         this.addUserToDB();
-
+                        // set has notification to true for my match' profile
+                        firebase.database()
+                        .ref('status/' + this.potentialMatches[this.counter].id)
+                        .update({
+                            hasNotification: true
+                        });
+                        this.newMatch();
+                        this.addUserToDB();
                     }   
                 })
             },

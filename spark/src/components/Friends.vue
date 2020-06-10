@@ -1,7 +1,9 @@
 <template>
     <div>
         <div v-for="match in myMatches" :key="match.id">
-            <router-link :to="'profile/' + match.id">{{ match.name }}</router-link>
+            <button >
+                <router-link :to="'profile/' + match.id">{{ match.name }}</router-link>
+            </button>
         </div>
     </div>
 </template>
@@ -14,7 +16,11 @@ import {db} from '../main';
     export default {
         data() {
             return {
-                myMatches: []
+                myMatches: [],
+                counter: 0,
+                id: '',
+                activeClass: 'hasNotifications',
+                isActive: false,
             }
         },
         created () {
@@ -26,15 +32,21 @@ import {db} from '../main';
             db.collection('matches')
             .doc(id)
             .collection('myMatches')
+            .orderBy("date")
             .get()
             .then(snapshot => {
                 snapshot.forEach(doc => {
+                    
                     if (doc.data().match != undefined) {
-                        matches.push(doc.data())
+                        matches.push(doc.data());
+                        this.counter++;
                     }
                 });
             })
             this.myMatches = matches;
+            console.log(this.myMatches);
+        },
+        methods: {
         },
         computed: {
             user () {

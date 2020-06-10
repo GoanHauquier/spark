@@ -13,7 +13,7 @@
             </span>
             <span v-else>
                 <div id="myDropdown" class="dropdown-content">
-                    <router-link to="/profile">{{ user.username }}</router-link><br>
+                    <button @click="removeNotifications()" v-bind:class="{ hasNotifications: isActive }"><router-link to="/profile">{{ user.username }}</router-link></button><br>
                     <router-link v-show="user.audio" to="/spark">Spark Queue</router-link>
                     <Authlog />
                 </div>
@@ -36,10 +36,13 @@ import Authlog from '../components/Testwidgets/Authlog';
         data() {
             return {
                 loggedIn: false,
+                activeClass: 'hasNotifications',
+                isActive: false,
+                id: ''
             }
         },
         created () {
-            // const id = firebase.auth().currentUser.uid;
+            this.id = firebase.auth().currentUser.uid;
             firebase.auth().onAuthStateChanged(user => {
                 if (user) {
                     this.loggedIn = true;
@@ -49,25 +52,27 @@ import Authlog from '../components/Testwidgets/Authlog';
                     this.loggedIn = false;
                 }
             });
-            // new match = set notification to true in realtime database
-            // firebase.database().ref('status/' + id).on('value', snapshot => {
-            //     if (!snapshot.val().notification) {
-            //         this.profileButton = 'Profile';
-            //     }
-            //     else {
-            //         this.profileButton = 'Profile*';
-            //     }
-            // });
+            firebase.database().ref('status/' + this.id).on('value', snapshot => {
+                if (snapshot.val().hasNotification) {
+                    this.isActive = true;
+                }
+            })
+        },
+        methods: {
+            removeNotifications() {
+                console.log('remove');
+                firebase.database()
+                .ref('status/' + this.id)
+                .update({
+                    hasNotification: false
+                });
+                this.isActive = false;
+            }
         },
         computed: {
             user () {
                 return this.$store.getters.user;
             }
-        },
-        methods: {
-            dropdown() {
-                console.log('pressed');
-            },
         },
     }
 </script>

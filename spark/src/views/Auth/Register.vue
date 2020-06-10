@@ -70,7 +70,7 @@ import {db} from '../../main';
                                     bio: 'My Bio',
                                     isAdmin: false,
                                     picture: this.standard,
-                                    audio: ''
+                                    audio: '',
                                 });
 
                                 db.collection('matches').doc(cUser.uid).collection('myMatches').doc('Activated').set({activated: true});

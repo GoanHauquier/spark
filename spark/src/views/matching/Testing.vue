@@ -67,7 +67,6 @@ import Matching from './Matching';
             firebase.database().ref('status').once('value', snapshot => {
                 snapshot.forEach(el => {
                     if (el.val().id == undefined) {
-                        console.log(el);
                         firebase.database().ref('status/' + el.key).remove();
                     }
                 })
@@ -133,7 +132,7 @@ import Matching from './Matching';
                                 }
                             }
                         });
-                        console.log('getting users data', this.userList);
+                        console.log('getting users data');
 
                         // fill a new array with data objects from the selected users
                         this.userList.forEach(doc => {
@@ -155,14 +154,9 @@ import Matching from './Matching';
 
                         if (this.arrayLength == 0) {
                             this.noUsers = true;
-                            console.log('null');
                         }
                         
                         console.log('data pending');
-                        // console.log('userList', this.userList);
-                        // console.log('usersData', this.usersData);
-                        // console.log(this.arrayLength);
-                        
                     })
                 })
                 // start the matching process

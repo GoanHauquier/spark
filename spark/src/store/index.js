@@ -18,24 +18,6 @@ export default new Vuex.Store({
   state: getDefaultState(),
   mutations: {
     setUser( state, res ) {
-    //   const arr = [];
-    //   if(!res) {
-    //     state.user = {};
-    //     return;
-    //   }
-    //   console.log(res);
-    //   Object.keys(res).forEach((users) => {
-    //     arr.push({
-    //       cUserame: users.username,
-    //       cBio: users.bio,
-    //       cIsAdmin: users.isAdmin
-    //     });
-
-    //   })
-    //   state.user = arr.slice();
-    //   console.log('slice', state.user);
-    // }
-
       if(!res) {
         state.user = {};
         return;
@@ -45,8 +27,6 @@ export default new Vuex.Store({
     },
     // get the getDefaultState() method to set the state to default values defined there
     resetState (state) {
-      // Merge rather than replace so we don't lose observers
-      // https://github.com/vuejs/vuex/issues/1118
       Object.assign(state, getDefaultState());
     }
   },
