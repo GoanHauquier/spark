@@ -31,7 +31,12 @@ import 'firebase/auth';
                 error: '',
             }
         },
-        
+        created () {
+            const user = firebase.auth().currentUser;
+            if (user) {
+                this.$router.replace({ name: 'Home' });
+            }
+        },
         methods: {
             async onSubmit() {
                 try {

@@ -42,7 +42,9 @@ import Authlog from '../components/Testwidgets/Authlog';
             }
         },
         created () {
-            this.id = firebase.auth().currentUser.uid;
+            if (this.loggedIn) {
+                this.id = firebase.auth().currentUser.uid;
+            }
             firebase.auth().onAuthStateChanged(user => {
                 if (user) {
                     this.loggedIn = true;
@@ -53,10 +55,14 @@ import Authlog from '../components/Testwidgets/Authlog';
                 }
             });
             firebase.database().ref('status/' + this.id).on('value', snapshot => {
-                if (snapshot.val().hasNotification) {
+                if (this.loggedIn && snapshot.val().hasNotification) {
                     this.isActive = true;
                 }
+                else {
+                    console.log('nothing going on here');
+                }
             })
+            
         },
         methods: {
             removeNotifications() {

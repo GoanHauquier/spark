@@ -44,6 +44,12 @@ import {db} from '../../main';
 
             }
         },
+        created () {
+            const user = firebase.auth().currentUser;
+            if (user) {
+                this.$router.replace({ name: 'Home' });
+            }
+        },
         methods: {
             async onSubmit() {
                 const passwordValidation = this.$refs.passwordval.value;
@@ -71,6 +77,24 @@ import {db} from '../../main';
                                     isAdmin: false,
                                     picture: this.standard,
                                     audio: '',
+                                    links: {
+                                        soundcloud: {
+                                            link: '',
+                                            class: 'soundcloud'
+                                        },
+                                        spotify: {
+                                            link: '',
+                                            class: 'spotify'
+                                        },
+                                        facebook: {
+                                            link: '',
+                                            class: 'facebook'
+                                        },
+                                        instagram: {
+                                            link: '',
+                                            class: 'instagram'
+                                        },
+                                    }
                                 });
 
                                 db.collection('matches').doc(cUser.uid).collection('myMatches').doc('Activated').set({activated: true});

@@ -10,6 +10,7 @@ import ForgotPassword from '../views/Auth/ForgotPassword.vue'
 import Edit from '../views/Auth/Edit.vue'
 import Matching from '../views/matching/Matching.vue'
 import Testing from '../views/matching/Testing.vue'
+import Admin from '../views/admin/Admin.vue'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -78,6 +79,13 @@ Vue.use(VueRouter)
     path: '/profile/:id',
     name: 'Friend',
     component: Friendpage,
+    // routeguard data
+    meta: { Authenticated: true }
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin,
     // routeguard data
     meta: { Authenticated: true }
   },

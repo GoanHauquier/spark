@@ -6,17 +6,20 @@
             Bio: 
             <input type="text" :value="cUserData.cBio" ref="bioInput">
             <br>
-            <input type="text" :value="cUserData.cBio" ref="bioInput"><br>
-            <input type="text" :value="cUserData.cBio" ref="bioInput"><br>
-            <input type="text" :value="cUserData.cBio" ref="bioInput"><br>
+
             <img :src="cUserData.cPicture" ref="myImg"><br>
             <input type="file" @change="getFile()" ref="myFile">
             <button v-show="hasFile" @click="editPicture()">Save img</button>
             <br>
             <input type="file" @change="getAudio()" ref="myAudio">
-            <button v-show="hasAudio" @click="editAudio()">Save img</button>
+            <button v-show="hasAudio" @click="editAudio()">Save audio</button>
             <br>
-            <button @click="editProfile()">Save</button>
+            <input type="text" :value="cUserData.cLinks.soundcloud" placeholder="Soundcloud" ref="soundcloudInput">
+            <input type="text" :value="cUserData.cLinks.spotify" placeholder="Spotify" ref="spotifyInput">
+            <input type="text" :value="cUserData.cLinks.facebook" placeholder="Facebook" ref="facebookInput">
+            <input type="text" :value="cUserData.cLinks.instagram" placeholder="Instagram" ref="instagramInput">
+            <button @click="addLinks()">Add links</button><br>
+            <button @click="editProfile()"><a href="/profile">Save</a></button>
             <button><router-link to='/profile'>Cancel</router-link></button>
         </div>
     </div>
@@ -37,12 +40,12 @@ import {db} from '../../main';
                     cBio: '',
                     cPicture: '',
                     cIsAdmin: null,
-                    links: {
-                        previewId: '',
+                    cLinks: {
                         soundcloud: '',
-                        youtube: '',
+                        spotify: '',
                         facebook: '',
-                    }
+                        instagram: ''
+                    },
                 },
                 file: {},
                 hasFile: false,
@@ -68,6 +71,13 @@ import {db} from '../../main';
                 this.cUserData.cBio = document.bio;
                 this.cUserData.cIsAdmin = document.isAdmin;
                 this.cUserData.cPicture = document.picture;
+
+                if (document.links !== undefined) {
+                    this.cUserData.cLinks.soundcloud = document.links.soundcloud.link;
+                    this.cUserData.cLinks.spotify = document.links.spotify.link;
+                    this.cUserData.cLinks.facebook = document.links.facebook.link;
+                    this.cUserData.cLinks.instagram = document.links.instagram.link;
+                }
             })
         },
         methods: {
@@ -86,7 +96,6 @@ import {db} from '../../main';
 
                 // make new storage record uniquely for the user and add the uploaded file
                 const storageRef = firebase.storage().ref('users/' + this.user.uid + '/profile' + Date.now().toString() + '.jpg');
-                console.log(storageRef);
 
                 if (this.file) {
                     // create new path in storage
@@ -127,6 +136,36 @@ import {db} from '../../main';
                     this.hasAudio = false;
                 }
             },
+            addLinks()  {
+                // set variable equal to user input
+                const newSoundcloud = this.$refs.soundcloudInput.value;
+                const newSpotify = this.$refs.spotifyInput.value;
+                const newFacebook = this.$refs.facebookInput.value;
+                const newInstagram = this.$refs.instagramInput.value;
+
+                db.collection("users")
+                .doc(this.user.uid)
+                .update({
+                    links: {
+                        soundcloud: {
+                            link: newSoundcloud,
+                            class: 'soundcloud'
+                        },
+                        spotify: {
+                            link: newSpotify,
+                            class: 'spotify'
+                        },
+                        facebook: {
+                            link: newFacebook,
+                            class: 'facebook'
+                        },
+                        instagram: {
+                            link: newInstagram,
+                            class: 'instagram'
+                        },
+                    }
+                })
+            },
             editProfile() {
 
                 // set variable equal to user input
@@ -143,8 +182,6 @@ import {db} from '../../main';
                     );
                     this.$refs.bioInput.value = newBio;
                     this.$refs.usernameInput.value = newUsername;
-
-                    this.$router.replace({ name: 'Profile' });
                 }
                 else {
                     alert('error');
