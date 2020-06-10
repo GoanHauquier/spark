@@ -6,6 +6,7 @@ import Register from '../views/Auth/Register.vue'
 import Authtest from '../views/Auth/Authtest.vue'
 import Friendpage from '../views/Auth/Friendpage.vue'
 import Profile from '../views/Auth/Profile.vue'
+import ForgotPassword from '../views/Auth/ForgotPassword.vue'
 import Edit from '../views/Auth/Edit.vue'
 import Matching from '../views/matching/Matching.vue'
 import Testing from '../views/matching/Testing.vue'
@@ -79,6 +80,11 @@ Vue.use(VueRouter)
     component: Friendpage,
     // routeguard data
     meta: { Authenticated: true }
+  },
+  {
+    path: '/resetpassword',
+    name: 'Reset',
+    component: ForgotPassword,
   },
 ]
 

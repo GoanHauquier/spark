@@ -40,7 +40,7 @@ import Authlog from '../components/Testwidgets/Authlog';
         },
         created () {
             // const id = firebase.auth().currentUser.uid;
-            firebase.auth().onAuthStateChanged(user=> {
+            firebase.auth().onAuthStateChanged(user => {
                 if (user) {
                     this.loggedIn = true;
                     this.$store.dispatch('fetchUserData');

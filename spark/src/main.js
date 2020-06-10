@@ -8,10 +8,13 @@ import { firestorePlugin } from 'vuefire'
 import { BootstrapVue } from 'bootstrap-vue'
 import './assets/scss/application.scss';
 import VueAudio from 'vue-audio-better'
+import VueNotification from '@mathieustan/vue-notification'
 
+
+// firebase credentials
 import config from './config'
 
-
+Vue.use(VueNotification)
 Vue.use(VueAudio)
 Vue.use(firestorePlugin)
 Vue.use(BootstrapVue)

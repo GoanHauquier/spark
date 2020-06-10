@@ -110,9 +110,24 @@ import {db} from '../../main';
                             name: this.user.username,
                             id: this.id
                         });
+                        this.newMatch();
                         this.addUserToDB();
+
                     }   
                 })
+            },
+            newMatch () {
+                this.$notify({
+                    message: "You've got a new Spark!",
+                    top: true,
+                    right: true,
+                    type: 'succes',
+                    theme: {
+                        colors: {
+                            succes: '#fofofo',
+                        },
+                    },
+                });
             },
         },
         computed: {

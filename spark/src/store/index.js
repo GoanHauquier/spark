@@ -6,11 +6,16 @@ import {db} from '../main';
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
+// method which sets the default values
+const getDefaultState = () => {
+  return {
     user: {},
-    recentUsers: []
-  },
+    recentUsers: [],
+  }
+}
+
+export default new Vuex.Store({
+  state: getDefaultState(),
   mutations: {
     setUser( state, res ) {
     //   const arr = [];
@@ -37,9 +42,16 @@ export default new Vuex.Store({
       }
         const {username, bio, isAdmin, picture, audio} = res;
         state.user = {username, bio, isAdmin, picture, audio}
+    },
+    // get the getDefaultState() method to set the state to default values defined there
+    resetState (state) {
+      // Merge rather than replace so we don't lose observers
+      // https://github.com/vuejs/vuex/issues/1118
+      Object.assign(state, getDefaultState());
     }
   },
   actions: {
+    // get the user data
     fetchUserData: ({commit}) => {
       const cUser = firebase.auth().currentUser;
       const id = cUser.uid;
@@ -53,6 +65,10 @@ export default new Vuex.Store({
         // set the userdata object to the current firestore data
         commit('setUser', document);
       })
+    },
+    // reset the user data
+    resetCurrentState ({ commit }) {
+      commit('resetState')
     },
   },
   getters: {

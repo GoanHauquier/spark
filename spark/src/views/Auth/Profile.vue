@@ -1,6 +1,11 @@
 <template>
     <div>
-        <div>
+        <div v-if="!userVerified">
+            Verification email sent
+            <br>
+            <button @click="sendVerificationEmail()">Send another email</button>
+        </div>
+        <div v-else>
             <img :src="user.picture"><br>
             {{ user.username }} <br>
             {{ user.bio }} <br>
@@ -23,13 +28,17 @@ import Friends from '../../components/Friends';
     export default {
         data() {
             return {
-                myMatches: []
+                myMatches: [],
+                userVerified: false
             }
         },
         components: {
             Friends
         },
         created () {
+            const user = firebase.auth().currentUser;
+            this.userVerified = user.emailVerified;
+
             this.$store.dispatch('fetchUserData');
 
             const id = firebase.auth().currentUser.uid;
@@ -47,6 +56,16 @@ import Friends from '../../components/Friends';
                 });
             })
             this.myMatches = matches;
+        },
+        methods: {
+            sendVerificationEmail() {
+                const user = firebase.auth().currentUser;
+                user.sendEmailVerification().then(function() {
+                    console.log('email sent');                    
+                }).catch(error => {
+                    console.log(error);
+                });
+            },
         },
         computed: {
             user () {
