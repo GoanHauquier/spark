@@ -1,6 +1,11 @@
 <template>
     <div>
-        <div v-for="match in myMatches" :key="match.id">
+        <h2>Your Sparks</h2>
+        <input type="text" v-model="searchInput">
+        <div v-if="!myMatches[0]">
+            No sparks yet
+        </div>
+        <div v-else v-for="match in filteredList" :key="match.id">
             <button >
                 <router-link :to="'profile/' + match.id">{{ match.name }}</router-link>
             </button>
@@ -19,8 +24,7 @@ import {db} from '../main';
                 myMatches: [],
                 counter: 0,
                 id: '',
-                activeClass: 'hasNotifications',
-                isActive: false,
+                searchInput: ''
             }
         },
         created () {
@@ -47,12 +51,18 @@ import {db} from '../main';
             console.log(this.myMatches);
         },
         methods: {
+            
         },
         computed: {
             user () {
                 return this.$store.getters.user;
+            },
+            filteredList() {
+                return this.myMatches.filter(post => {
+                    return post.name.toLowerCase().includes(this.searchInput.toLowerCase())
+                });
             }
-        },
+        },   
     }
 </script>
 

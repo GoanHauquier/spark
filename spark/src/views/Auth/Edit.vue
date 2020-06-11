@@ -97,7 +97,7 @@ import {db} from '../../main';
                 // make new storage record uniquely for the user and add the uploaded file
                 const storageRef = firebase.storage().ref('users/' + this.user.uid + '/profile' + Date.now().toString() + '.jpg');
 
-                if (this.file) {
+                if (this.file && this.file.size < 1024 * 1024) {
                     // create new path in storage
                     storageRef.put(this.file).then(function() {
                         const id = user.uid;
@@ -110,17 +110,25 @@ import {db} from '../../main';
                             }); 
                         })
                     });
+                    this.fileUploaded();
                     this.hasFile = false;
+                }
+                else if (this.file['type'] !== 'image/jpeg') { 
+                    this.imageError();
+                }
+                else {
+                    this.fileError();
                 }
             },
             editAudio() {
                 const user = this.user;
+                const allowedExtensions = /(\.mp3)$/i;
 
                 // make new storage record uniquely for the user and add the uploaded file
                 const storageRef = firebase.storage().ref('audio/' + this.user.uid + '/audio.mp3');
                 console.log(storageRef);
 
-                if (this.audio) {
+                if (this.audio && this.audio.size < 1024 * 1024) {
                     // create new path in storage
                     storageRef.put(this.audio).then(function() {
                         const id = user.uid;
@@ -133,7 +141,14 @@ import {db} from '../../main';
                             }); 
                         })
                     });
+                    this.fileUploaded();
                     this.hasAudio = false;
+                }
+                else if (!allowedExtensions.exec(this.audio)) { 
+                    this.audioError();
+                }
+                else {
+                    this.fileError();
                 }
             },
             addLinks()  {
@@ -188,6 +203,58 @@ import {db} from '../../main';
                 }
                 
             },
+            fileError () {
+                this.$notify({
+                    message: 'File exceeds the 1MB limit!',
+                    top: true,
+                    right: true,
+                    type: 'warning',
+                    theme: {
+                        colors: {
+                            warning: '#f8a623',
+                        },
+                    },
+                });
+            },
+            imageError () {
+                this.$notify({
+                    message: 'File is not an image!',
+                    top: true,
+                    right: true,
+                    type: 'warning',
+                    theme: {
+                        colors: {
+                            warning: '#f8a623',
+                        },
+                    },
+                });
+            },
+            audioError () {
+                this.$notify({
+                    message: 'File is not an mp3!',
+                    top: true,
+                    right: true,
+                    type: 'warning',
+                    theme: {
+                        colors: {
+                            warning: '#f8a623',
+                        },
+                    },
+                });
+            },
+            fileUploaded() {
+                this.$notify({
+                    message: 'File uploaded!',
+                    top: true,
+                    right: true,
+                    type: 'succes',
+                    theme: {
+                        colors: {
+                            succes: '#fofofo',
+                        },
+                    },
+                });
+            }
         },
         
     }
