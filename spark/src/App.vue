@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container">
+  <div id="app" class="container-fluid">
     <Main />
     <!-- <Authlog /> -->
   </div>
@@ -16,3 +16,8 @@ import Main from './views/Main';
     },
   }
 </script>
+
+<style lang="scss">
+  #app {
+  }
+</style>

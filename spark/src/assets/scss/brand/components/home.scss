@@ -1,0 +1,118 @@
+// HOMEPAGE
+.home {
+    height: 100vh;
+   // border: black 1px solid;
+    .illustration  {
+        opacity: 0.6;
+        margin-top: 80px;
+        img {
+            width: 700px;
+        }
+        .spark1 {
+            position: absolute;
+            z-index: -1;
+        }
+        .spark2 {
+            position: absolute;
+            z-index: -1;
+        }
+    }
+    .content {
+        
+        top: 35vh;
+        h1 {
+            font-size: 8em;
+            font-weight: 400;
+        }
+        h3 {
+            font-size: 3em;;
+            font-weight: 400;
+        }
+        .cta {
+            margin-top: 30px;
+            background-color: transparent;
+            border: black 5px solid;
+            font-size: 1.5em;
+            color: black;
+            display: inline-block;
+            width: 300px;
+            padding: 25px 0;
+            text-align: center;
+            transition: 0.5s ease;
+
+            &:hover {
+                color: white;
+                background-color: black;
+                animation: fire infinite 2s ease;
+                box-shadow: black 2px 2px 5px;
+            }
+        }
+    }
+    .mobilecta {
+        display: none;
+    }
+}
+
+@media (max-width: $xs) {
+    .home {
+        height: 40vh;
+       // border: black 1px solid;
+        .illustration  {
+            opacity: 0.6;
+            margin-top: 80px;
+            img {
+                max-width: 200px;
+            }
+        }
+        .content {
+            top: 15vh;
+            h1 {
+                font-size: 3em;
+                font-weight: 400;
+            }
+            h3 {
+                font-size: 1em;;
+                font-weight: 400;
+            }
+            .cta {
+                display: none;
+            }
+        }
+        .mobilecta {
+            
+            text-align: center;
+            background-color: transparent;
+            border: black 5px solid;
+            font-size: 1.5em;
+            color: black;
+            display: inline-block;
+            width: 200px;
+            padding: 15px 0;
+            margin: auto;
+            margin-top: 30vh;
+            transition: 0.5s ease;
+        }
+    }
+}
+
+@media (max-width: $sm) and (min-width: $xs) {
+    .home {
+       // border: black 1px solid;
+        .illustration  {
+            opacity: 0.6;
+            margin-top: 80px;
+            img {
+                width: 400px;
+            }
+            .spark1 {
+                position: absolute;
+                z-index: -1;
+            }
+            .spark2 {
+                position: absolute;
+                z-index: -1;
+            }
+        }
+
+    }
+}

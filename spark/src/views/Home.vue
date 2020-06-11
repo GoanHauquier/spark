@@ -2,7 +2,7 @@
   <div class="home">
       <div v-show="currentUser && !user.audio"><p>Remember to upload an audiofile</p></div>
       <div class="row">
-        <kinesis-container easing="cubic-bezier(0.9, 1, 0.9, 1)">
+        <!-- <kinesis-container easing="cubic-bezier(0.9, 1, 0.9, 1)">
 
           <div class="illustration col-12">
 
@@ -16,11 +16,13 @@
 
           </div>
 
-        </kinesis-container>
-        <div class="content col-11 text-right">
+        </kinesis-container> -->
+        <div class="content col-12">
           <h1>SPARK</h1>
-          <h3>Let's light a fire</h3>
-          <router-link to='/register'>Get Started</router-link>
+          <vue-typed-js :strings="['connects^2000', 'inspires^2000']" :loop="true" :showCursor="false" :typeSpeed="20">
+            <h2>Music <span class="typing"></span></h2>
+          </vue-typed-js>
+          <router-link to='/register' class="cta">Get Started</router-link>
         </div>
       </div>
   </div>

@@ -11,10 +11,12 @@ import VueAudio from 'vue-audio-better'
 import VueNotification from '@mathieustan/vue-notification'
 import SvgTransition from 'vue-svg-transition'
 import VueKinesis from 'vue-kinesis'
+import VueTypedJs from 'vue-typed-js'
 
 // firebase credentials
 import config from './config'
 
+Vue.use(VueTypedJs)
 Vue.use(VueKinesis)
 Vue.use(SvgTransition);
 Vue.use(VueNotification)

@@ -1,17 +1,16 @@
 <template>
-    <div class="friends">
+    <div class="friends col-xs-4">
         <h2>Your Sparks</h2>
         <input type="text" v-model="searchInput" placeholder="Search Sparks" class="friendsearch">
         <div v-if="!myMatches[0]">
             No sparks yet
         </div>
         <div v-else v-for="match in filteredList" :key="match.id" class="friendlist">
-            <a>
-                <div v-bind:class="{ 'hasNotifications': match.match == 1}" @click="removeNotifications(match.id)">
-                    <router-link :to="'profile/' + match.id">{{ match.name }}</router-link>
+                <div v-bind:class="[{ '': match.match == 1}, 'match']" @click="removeNotifications(match.id)">
+                    <router-link :to="'profile/' + match.id">{{ match.name }}</router-link><br>
                 </div>  
-            </a>
         </div>
+                           
     </div>
 </template>
 

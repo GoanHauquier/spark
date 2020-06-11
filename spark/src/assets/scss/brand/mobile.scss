@@ -1,4 +1,10 @@
-@media (min-width: 501px) {
+@media (max-width: $lg) {
+    .desktop-nav {
+        display: none;
+    }
+}
+
+@media (min-width: $lg) {
     .mobile-nav {
         display: none;
     }
@@ -7,8 +13,12 @@
     }
 }
 
-@media (max-width: 500px) {
+@media (min-width: $lg) {
     .desktop-nav {
-        display: none;
+        font-size: 1em;
+        
+        a {
+            margin-left: 15px;
+        }
     }
 }

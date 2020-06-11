@@ -1,0 +1,61 @@
+// HEADER
+.header {
+    margin-top: 25px;
+    // border: black 5px solid;
+    .desktop-nav {
+        font-size: 1.2em;
+        a {
+            text-transform: uppercase;
+            margin-left: 30px;
+            transition: 0.2s ease;
+        }
+        a:hover {
+            cursor: pointer;
+            padding-bottom: 2px;
+            border-bottom: black 2px solid;
+            transition: 0.2s ease;
+        }
+    }
+    .signout {
+        border: black 1px solid;
+        padding: 5px;
+        transition: 0.2s ease;
+        font-size: 0.8em;
+        
+        &:hover {
+            background-color: black;
+            color: white;
+            font-weight: bold;
+        }
+    }
+    .about {
+        color: black;
+    }
+    .registration {
+        color: white;
+        text-shadow: rgb(0, 0, 0) 1px 0px 0px, rgb(0, 0, 0) 0.540302px 0.841471px 0px,
+            rgb(0, 0, 0) -0.416147px 0.909297px 0px, rgb(0, 0, 0) -0.989992px 0.14112px 0px, 
+            rgb(0, 0, 0) -0.653644px -0.756802px 0px, rgb(0, 0, 0) 0.283662px -0.958924px 0px,
+            rgb(0, 0, 0) 0.96017px -0.279415px 0px;      
+    }
+}
+.home-title {
+    color: #fff;
+    text-shadow: rgb(0, 0, 0) 1px 0px 0px, rgb(0, 0, 0) 0.540302px 0.841471px 0px,
+                rgb(0, 0, 0) -0.416147px 0.909297px 0px, rgb(0, 0, 0) -0.989992px 0.14112px 0px, 
+                rgb(0, 0, 0) -0.653644px -0.756802px 0px, rgb(0, 0, 0) 0.283662px -0.958924px 0px,
+                rgb(0, 0, 0) 0.96017px -0.279415px 0px;
+    letter-spacing: 5px;
+    font-weight: 400;
+    font-size: 2em;
+    transition: 0.4s ease;
+
+    &:hover {
+        text-shadow: rgb(0, 0, 0) -2px 0px 0px, rgb(0, 0, 0) 0.540302px 0.841471px 0px,
+        rgb(0, 0, 0) -0.416147px 0.909297px 0px, rgb(0, 0, 0) -0.989992px 0.14112px 0px, 
+        rgb(0, 0, 0) -0.653644px -0.756802px 0px, rgb(0, 0, 0) 0.283662px -0.958924px 0px,
+        rgb(0, 0, 0) 0.96017px -0.279415px 0px;
+        letter-spacing: 7px;
+        margin-left: 5px;
+    }
+}
