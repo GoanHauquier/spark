@@ -34,4 +34,4 @@ import 'firebase/firestore';
             })
         },
     }
-</script>
+</script> 
