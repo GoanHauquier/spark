@@ -1,0 +1,14 @@
+@media (min-width: 501px) {
+    .mobile-nav {
+        display: none;
+    }
+    .burger-button {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .desktop-nav {
+        display: none;
+    }
+}

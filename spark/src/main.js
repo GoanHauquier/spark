@@ -9,11 +9,14 @@ import { BootstrapVue } from 'bootstrap-vue'
 import './assets/scss/application.scss';
 import VueAudio from 'vue-audio-better'
 import VueNotification from '@mathieustan/vue-notification'
-
+import SvgTransition from 'vue-svg-transition'
+import VueKinesis from 'vue-kinesis'
 
 // firebase credentials
 import config from './config'
 
+Vue.use(VueKinesis)
+Vue.use(SvgTransition);
 Vue.use(VueNotification)
 Vue.use(VueAudio)
 Vue.use(firestorePlugin)

@@ -1,26 +1,31 @@
 <template>
-    <div class="container">
+    <div class="edit">
+        <h1>Settings</h1>
+        <div class="text-right">
+            <a><router-link to='/profile'>Back</router-link></a>
+        </div>
         <div>
             Username: 
             <input type="text" :value="cUserData.cUsername" ref="usernameInput"><br>
             Bio: 
             <input type="text" :value="cUserData.cBio" ref="bioInput">
             <br>
-
-            <img :src="cUserData.cPicture" ref="myImg"><br>
-            <input type="file" @change="getFile()" ref="myFile">
-            <button v-show="hasFile" @click="editPicture()">Save img</button>
-            <br>
-            <input type="file" @change="getAudio()" ref="myAudio">
-            <button v-show="hasAudio" @click="editAudio()">Save audio</button>
-            <br>
+            
             <input type="text" :value="cUserData.cLinks.soundcloud" placeholder="Soundcloud" ref="soundcloudInput">
             <input type="text" :value="cUserData.cLinks.spotify" placeholder="Spotify" ref="spotifyInput">
             <input type="text" :value="cUserData.cLinks.facebook" placeholder="Facebook" ref="facebookInput">
             <input type="text" :value="cUserData.cLinks.instagram" placeholder="Instagram" ref="instagramInput">
-            <button @click="addLinks()">Add links</button><br>
-            <button @click="editProfile()"><a href="/profile">Save</a></button>
-            <button><router-link to='/profile'>Cancel</router-link></button>
+            <br>
+            <button @click="editProfile()"><a href="/edit">Save info</a></button>
+            <img :src="cUserData.cPicture" ref="myImg"><br>
+            profile picture
+            <input type="file" @change="getFile()" ref="myFile">
+            <!-- <button v-show="hasFile" @click="editPicture()">Save img</button> -->
+            <br>
+            audio (max 1mb)
+            <input type="file" @change="getAudio()" ref="myAudio">
+            <!-- <button v-show="hasAudio" @click="editAudio()">Save audio</button> -->
+            
         </div>
     </div>
 </template>
@@ -51,7 +56,7 @@ import {db} from '../../main';
                 hasFile: false,
                 audio: {},
                 hasAudio: false,
-                user: {}
+                user: {},
             }
         },
         created () {
@@ -85,11 +90,15 @@ import {db} from '../../main';
                 // get the uploaded file
                 this.file = this.$refs.myFile.files[0];
                 this.hasFile = true;
+
+                this.editPicture();
             },
             getAudio() {
                 // get the uploaded file
                 this.audio = this.$refs.myAudio.files[0];
                 this.hasAudio = true;
+
+                this.editAudio();
             },
             editPicture() {
                 const user = this.user;
@@ -99,7 +108,8 @@ import {db} from '../../main';
 
                 if (this.file && this.file.size < 1024 * 1024) {
                     // create new path in storage
-                    storageRef.put(this.file).then(function() {
+                    storageRef.put(this.file).then(e => {
+                        e;
                         const id = user.uid;
                         console.log('Uploaded!');
                         storageRef.getDownloadURL().then(imgUrl => {
@@ -108,13 +118,13 @@ import {db} from '../../main';
                             db.collection("users").doc(id).update({
                                 picture: imgUrl,
                             }); 
+                            this.fileUploaded();
                         })
+                    }).catch(err => {
+                        err;
+                        this.imageError()
                     });
-                    this.fileUploaded();
                     this.hasFile = false;
-                }
-                else if (this.file['type'] !== 'image/jpeg') { 
-                    this.imageError();
                 }
                 else {
                     this.fileError();
@@ -122,7 +132,6 @@ import {db} from '../../main';
             },
             editAudio() {
                 const user = this.user;
-                const allowedExtensions = /(\.mp3)$/i;
 
                 // make new storage record uniquely for the user and add the uploaded file
                 const storageRef = firebase.storage().ref('audio/' + this.user.uid + '/audio.mp3');
@@ -130,8 +139,9 @@ import {db} from '../../main';
 
                 if (this.audio && this.audio.size < 1024 * 1024) {
                     // create new path in storage
-                    storageRef.put(this.audio).then(function() {
+                    storageRef.put(this.audio).then(e => {
                         const id = user.uid;
+                        e;
                         console.log('Uploaded!');
                         storageRef.getDownloadURL().then(audioURL => {
                             console.log(audioURL);
@@ -139,13 +149,13 @@ import {db} from '../../main';
                             db.collection("users").doc(id).update({
                                 audio: audioURL,
                             }); 
+                            this.fileUploaded();
                         })
+                    }).catch(err => {
+                        err;
+                        this.audioError()
                     });
-                    this.fileUploaded();
                     this.hasAudio = false;
-                }
-                else if (!allowedExtensions.exec(this.audio)) { 
-                    this.audioError();
                 }
                 else {
                     this.fileError();
@@ -197,6 +207,7 @@ import {db} from '../../main';
                     );
                     this.$refs.bioInput.value = newBio;
                     this.$refs.usernameInput.value = newUsername;
+                    this.addLinks();
                 }
                 else {
                     alert('error');

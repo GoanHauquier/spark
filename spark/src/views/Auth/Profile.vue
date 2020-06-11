@@ -1,34 +1,54 @@
 <template>
-    <div>
+    <div class="profile">
         <div v-if="!userVerified">
             Verification email sent
             <br>
             <button @click="sendVerificationEmail()">Send another email</button>
         </div>
-        <div v-else>
-            <img :src="user.picture"><br>
-            {{ user.username }} <br>
-            {{ user.bio }} <br>
-            <div v-if="user.isAdmin == false">You're not an admin</div>
-            <div v-else>Welcome admin</div>
-            <button><router-link to='/edit'>Edit profile</router-link></button>
+        
+        <div v-else class="profilecontent">
+            <div class="text-right">
+                <a><router-link to='/edit'>Edit profile</router-link></a>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-12">
+                    <h1>{{ user.username }}</h1><br>
+                    <p>{{ user.bio }}</p> <br>
+                </div>
+
+                <div class="col-md-4 col-sm-12">
+                    <div class="col-6">
+                        <img :src="user.picture"><br>
+                    </div>
+                    
+                    <div v-if="user.audio" class="col-6 text-center">
+                        <mini-audio        
+                            :html5="true"
+                            :src="user.audio">
+                        </mini-audio >
+                    </div>
+                    <div v-else>Upload an mp3</div>
+
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <Friends />
+                </div>
+            </div>
         </div>
-        <div v-if="user.audio">
-            <mini-audio        
-                :html5="true"
-                :src="user.audio"
-            >
-            </mini-audio >
+        <div class="socials col-12 text-center row">
+            <a :href="links.soundcloud.link" target="_blank" v-show="links.soundcloud.link != ''">
+                <div :class="links.soundcloud.class">Soundcloud</div>
+            </a>
+            <a :href="links.spotify.link" target="_blank" v-show="links.spotify.link != ''">
+                <div :class="links.spotify.class">Spotify</div>
+            </a>
+            <a :href="links.instagram.link" target="_blank" v-show="links.instagram.link != ''">
+                <div :class="links.instagram.class">Instagram</div>
+            </a>
+            <a :href="links.facebook.link" target="_blank" v-show="links.facebook.link != ''">
+                <div :class="links.facebook.class">Facebook</div>
+            </a>
         </div>
-        <div v-else>Upload an mp3</div>
-        <div class="socials">
-            <h2>Socials</h2>
-            <div v-show="links.soundcloud.link != ''" :class="links.soundcloud.class">Soundcloud</div>
-            <div v-show="links.spotify.link != ''" :class="links.spotify.class">Spotify</div>
-            <div v-show="links.facebook.link != ''" :class="links.facebook.class">Facebook</div>
-            <div v-show="links.instagram.link != ''" :class="links.instagram.class">Instagram</div>
-        </div>
-        <Friends />
     </div>
 </template>
 

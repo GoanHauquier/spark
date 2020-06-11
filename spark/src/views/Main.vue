@@ -16,10 +16,12 @@
 import Header from './Header';
 import Footer from './Footer';
 
+
     export default {
         components: {
             Header,
-            Footer
+            Footer,
+            
         },
         data() {
             return {
@@ -30,8 +32,14 @@ import Footer from './Footer';
                 //     cBio: '',
                 //     cIsAdmin: null,
                 // },
-                
-                
+            }
+        },
+        methods: {
+            openMenu() {
+                this.$router.replace({ name: 'Burger' });
+            },
+            closeMenu() {
+                this.$router.replace({ name: 'Home' });
             }
         },
         created () {

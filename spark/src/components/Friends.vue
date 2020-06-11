@@ -1,14 +1,16 @@
 <template>
-    <div>
+    <div class="friends">
         <h2>Your Sparks</h2>
-        <input type="text" v-model="searchInput">
+        <input type="text" v-model="searchInput" placeholder="Search Sparks" class="friendsearch">
         <div v-if="!myMatches[0]">
             No sparks yet
         </div>
-        <div v-else v-for="match in filteredList" :key="match.id">
-            <button >
-                <router-link :to="'profile/' + match.id">{{ match.name }}</router-link>
-            </button>
+        <div v-else v-for="match in filteredList" :key="match.id" class="friendlist">
+            <a>
+                <div v-bind:class="{ 'hasNotifications': match.match == 1}" @click="removeNotifications(match.id)">
+                    <router-link :to="'profile/' + match.id">{{ match.name }}</router-link>
+                </div>  
+            </a>
         </div>
     </div>
 </template>
@@ -31,6 +33,7 @@ import {db} from '../main';
             this.$store.dispatch('fetchUserData');
 
             const id = firebase.auth().currentUser.uid;
+            this.id = id;
             const matches = [];
 
             db.collection('matches')
@@ -40,18 +43,24 @@ import {db} from '../main';
             .get()
             .then(snapshot => {
                 snapshot.forEach(doc => {
-                    
                     if (doc.data().match != undefined) {
                         matches.push(doc.data());
                         this.counter++;
                     }
                 });
-            })
+            });
             this.myMatches = matches;
-            console.log(this.myMatches);
         },
         methods: {
-            
+            removeNotifications(matchId) {
+                db.collection('matches')
+                .doc(this.id)
+                .collection('myMatches')
+                .doc(matchId)
+                .update({
+                    match: 2,
+                });
+            }
         },
         computed: {
             user () {
