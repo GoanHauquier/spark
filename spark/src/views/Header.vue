@@ -1,24 +1,32 @@
 <template>
-    <div class="row header">
-        <div class="text-left col-6">
-            <router-link to="/">
-                <h3 class="home-title">SPARK</h3>
-            </router-link>
-        </div>
-        <div class="text-right col-6 desktop-nav">
-            
-            <span v-if="loggedIn">
-                <router-link v-show="user.audio" to="/spark" class="start registration">START</router-link>
-                <router-link to="/about" class="other">ABOUT</router-link>
-                <router-link to="/profile" v-bind:class="[{ 'hasNotifications': isActive} , 'registration' ]">{{ user.username }}</router-link>
-                <a @click="signOut()" class="signout">SIGN OUT</a>
-            </span>
-            <span v-else>
-                <router-link to="/about" class="about">About</router-link>
-                <router-link to="/login" class="registration">Login</router-link>
-                <router-link to="/register" class="registration">Register</router-link> 
-            </span>
-        </div>
+    <div class="header-wrapper container-fluid">
+        <div class="row">
+                <div class="text-left header col-6 left text">
+                    <router-link to="/">
+                        <!-- <h3 class="home-title">SPARK</h3> -->
+                        <Spark class="svg text" />
+                    </router-link>
+                </div>
+                <div class="text-left header col-6 left logo">
+                    <router-link to="/">
+                        <!-- <h3 class="home-title">SPARK</h3> -->
+                        <Logo class="svg logo" />
+                    </router-link>
+                </div>
+                <div class="text-right desktop-nav col-6 header right">
+                    <span v-if="loggedIn">
+                        <router-link v-show="user.audio" to="/spark" class="start registration">START</router-link>
+                        <router-link to="/about" class="other">ABOUT</router-link>
+                        <router-link to="/profile" v-bind:class="[{ 'hasNotifications': isActive} , 'registration', 'usericon' ]"><User /></router-link>
+                        <a @click="signOut()" class="signout">SIGN OUT</a>
+                    </span>
+                    <span v-else>
+                        <router-link to="/about" class="about">About</router-link>
+                        <router-link to="/login" class="registration">Login</router-link>
+                        <router-link to="/register" class="registration">Register</router-link> 
+                    </span>
+                </div>
+        </div>           
     </div>
 </template>
 
@@ -27,7 +35,16 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import'firebase/database';
 
+import Spark from '../assets/SVG/logo/spark-text.svg';
+import Logo from '../assets/SVG/logo/logo.svg';
+import User from '../assets/SVG/usericon.svg';
+
     export default {
+        components: {
+            Spark,
+            Logo,
+            User
+        },
         data() {
             return {
                 loggedIn: false,
@@ -87,3 +104,35 @@ import'firebase/database';
         },
     }
 </script>
+
+<style lang="scss">
+.text {
+    transition: 0.2s ease;
+
+    &:hover {
+        stroke-dasharray: 50;
+        animation: dash 4s infinite;
+        transform: scale(1.02);
+    }
+
+}
+@keyframes dash {
+    to {
+        stroke-dashoffset: 100;
+    }
+}
+
+.logo {
+    &:hover {
+        animation: logo 0.2s ease-out;
+    }
+}
+@keyframes logo {
+    60% {
+        transform: translateX(3px) translateY(-3px);
+    }
+    100% {
+        transform: translateX(0) translateY(0);
+    }
+}
+</style>

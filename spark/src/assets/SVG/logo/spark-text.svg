@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="33.481533mm"
+   height="7.6305833mm"
+   viewBox="0 0 33.481533 7.6305833"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="spark-text.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="205.30649"
+     inkscape:cy="-119.50837"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-70.013359,-104.96401)">
+    <g
+       aria-label="SPARK"
+       transform="scale(0.26458333)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:KdG;-inkscape-font-specification:KdG;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot815">
+      <path
+         d="m 275.33742,425.55437 q -3,0 -5.76,-0.88 -2.72,-0.92 -4.36,-2.44 -0.6,-0.56 -0.6,-1.39999 0,-0.56 0.32,-0.96001 0.32,-0.44 0.76,-0.44 0.52,0 1.12,0.44 3.72,2.88 8.48,2.88 3.44,0 5.28,-1.32 1.84,-1.32 1.84,-3.76 0,-1.39999 -0.88,-2.24 -0.88,-0.88 -2.32,-1.4 -1.44,-0.52 -3.88,-1.07999 -3.28,-0.76001 -5.4,-1.60001 -2.08,-0.84 -3.4,-2.39999 -1.28,-1.56 -1.28,-4.08001 0,-2.4 1.28,-4.24 1.32,-1.88 3.64,-2.88 2.36,-1.03999 5.36,-1.03999 2.8,0 5.2,0.88 2.44,0.83999 4.08,2.43999 0.64,0.64 0.64,1.4 0,0.56 -0.32,1 -0.32,0.40001 -0.76,0.40001 -0.44,0 -1.16,-0.44001 -1.96,-1.6 -3.64,-2.23999 -1.68,-0.64001 -4.04,-0.64001 -3.32,0 -5.16,1.4 -1.84,1.36001 -1.84,3.84 0,2.12 1.6,3.20001 1.64,1.03999 5,1.83999 3.64,0.88 5.72,1.64 2.08,0.72001 3.44,2.2 1.4,1.48 1.4,3.96001 0,2.36 -1.32,4.15999 -1.28,1.8 -3.64,2.8 -2.36,1 -5.4,1 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Nunito;-inkscape-font-specification:Nunito;fill:none;stroke:#000000;stroke-opacity:1"
+         id="path823" />
+      <path
+         d="m 292.66492,425.43437 q -0.76,0 -1.2,-0.44 -0.44,-0.48 -0.44,-1.24 v -25.12 q 0,-0.72 0.44,-1.16 0.48,-0.44 1.24,-0.44 h 9.48 q 4.44,0 6.88,2.16 2.48,2.16 2.48,6.12 0,3.96001 -2.48,6.16 -2.48,2.2 -6.88,2.2 h -7.88 v 10.08 q 0,0.76 -0.44,1.24 -0.44,0.44 -1.2,0.44 z m 9.2,-14.47999 q 6.44,0 6.44,-5.64001 0,-5.56 -6.44,-5.56 h -7.56 v 11.20001 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Nunito;-inkscape-font-specification:Nunito;fill:none;stroke:#000000;stroke-opacity:1"
+         id="path825" />
+      <path
+         d="m 338.11742,423.35437 q 0.16,0.32 0.16,0.68 0,0.6 -0.48,1 -0.44,0.4 -1.08,0.4 -1,0 -1.4,-0.96 l -2.84,-6.48 h -15.08 l -2.88,6.48 q -0.4,0.96 -1.4,0.96 -0.64,0 -1.12,-0.4 -0.48,-0.43999 -0.48,-1.04 0,-0.32 0.16,-0.64 l 11.44,-25.44 q 0.24,-0.56 0.72,-0.83999 0.48,-0.28001 1.04,-0.28001 0.6,0 1.08,0.32 0.48,0.28 0.72,0.8 z m -19.52,-8.07999 h 12.68 l -6.36,-14.36001 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Nunito;-inkscape-font-specification:Nunito;fill:none;stroke:#000000;stroke-opacity:1"
+         id="path827" />
+      <path
+         d="m 364.41992,423.19437 q 0.28,0.44 0.28,0.92 0,0.60001 -0.48,1 -0.44,0.36 -1.04,0.36 -0.92,0 -1.44,-0.8 l -5.36,-8.48 q -1.04,-1.64 -2.16,-2.23999 -1.12,-0.64001 -3.04,-0.64001 h -5.04 v 10.44 q 0,0.76 -0.44,1.24 -0.44,0.44 -1.16,0.44 -0.76,0 -1.2,-0.44 -0.44,-0.48 -0.44,-1.24 v -25.12 q 0,-0.72 0.44,-1.16 0.48,-0.44 1.24,-0.44 h 9.92 q 4.6,0 7,2.04 2.44,2.04 2.44,6 0,3.36 -1.96,5.4 -1.92,2.04 -5.52,2.48001 1,0.32 1.8,1.03999 0.8,0.72001 1.6,2 z m -10.2,-12.59999 q 3.28,0 4.88,-1.36001 1.64,-1.36 1.64,-4.12 0,-2.72 -1.6,-4.04 -1.6,-1.32 -4.92,-1.32 h -8.08 v 10.84001 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Nunito;-inkscape-font-specification:Nunito;fill:none;stroke:#000000;stroke-opacity:1"
+         id="path829" />
+      <path
+         d="m 390.6018,422.75437 q 0.56,0.52001 0.56,1.16 0,0.56 -0.48,1.04001 -0.44,0.44 -1.04,0.44 -0.52,0 -1.08,-0.48001 l -14.96,-13.07999 v 11.91999 q 0,0.76 -0.44,1.24 -0.44,0.44 -1.2,0.44 -0.76,0 -1.2,-0.44 -0.44,-0.48 -0.44,-1.24 v -25.24 q 0,-0.76 0.44,-1.2 0.44,-0.47999 1.2,-0.47999 0.76,0 1.2,0.47999 0.44,0.44 0.44,1.2 v 11.48 l 14.28,-12.68 q 0.44,-0.44 1.04,-0.44 0.6,0 1.04,0.48 0.44,0.44 0.44,1 0,0.60001 -0.52,1.12 l -12.92,11.36001 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Nunito;-inkscape-font-specification:Nunito;fill:none;stroke:#000000;stroke-opacity:1"
+         id="path831" />
+    </g>
+  </g>
+</svg>

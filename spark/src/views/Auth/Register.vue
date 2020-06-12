@@ -1,26 +1,40 @@
 <template>
-    <div>
-        Register
-        <div v-if="error">
-            {{ error.message }}
-        </div>
+    <div class="form-wrapper container-fluid">
+        
+        <div class="form">
 
-        <form @submit.prevent="onSubmit">
+            <div v-if="error">
+                {{ error.message }}
+            </div>
+
+            <h1>Register</h1>
+            <form @submit.prevent="onSubmit">
             <div>
-                <input type="text" v-model="username" placeholder="Username" minlength="2" maxlength="32">
+                <input class="inputfield" type="text" v-model="username" placeholder="Username" minlength="2" maxlength="32">
             </div>
             <div>
-                <input type="email" v-model='email' placeholder="e-mailadress" >
+                <input class="inputfield" type="email" v-model='email' placeholder="e-mailadress" >
             </div>
             <div>
-                <input type="password" v-model='password' placeholder="Password" minlength="7">
+                <input class="inputfield" type="password" v-model='password' placeholder="Password" minlength="7">
             </div>
             <div>
-                <input type="password" placeholder="Retype password" ref="passwordval" >
+                <input class="inputfield" type="password" placeholder="Retype password" ref="passwordval" >
             </div>
-            <button type='submit'>Register</button>
-        </form>
-        <p>Already have an account? <router-link to="/login">Login</router-link></p>
+            <div class="row checkbox">
+                <div>
+                    <input class="" type="checkbox" required>
+                </div>
+                <div>
+                    
+                    <p>I accept the terms of service</p>
+                </div>
+            </div>
+            <input class="formbutton" type="submit" value="Register">
+            </form>
+            <p class="whitespace">Already have an account? <router-link to="/login">Login</router-link></p>
+        </div>
+        <svg class="wave2" xmlns="http://www.w3.org/2000/svg" viewBox="0 -20 1440 200"><path fill="#273036" fill-opacity="1" d="M0,128L60,122.7C120,117,240,107,360,112C480,117,600,139,720,138.7C840,139,960,117,1080,90.7C1200,64,1320,32,1380,16L1440,0L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
     </div>
 </template>
 

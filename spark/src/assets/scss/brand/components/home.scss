@@ -1,118 +1,81 @@
-// HOMEPAGE
 .home {
+    margin: 0;
+    padding: 0;
     height: 100vh;
-   // border: black 1px solid;
-    .illustration  {
-        opacity: 0.6;
-        margin-top: 80px;
-        img {
-            width: 700px;
-        }
-        .spark1 {
-            position: absolute;
-            z-index: -1;
-        }
-        .spark2 {
-            position: absolute;
-            z-index: -1;
-        }
+    position: relative;
+
+    section {
+            position: relative;
+            //background: url(../images/bg.jpg);
+            background: linear-gradient(90deg, whitesmoke, gray), url(../../assets/images/artist.jpg);
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: screen;
+            height: 100%;
     }
+
     .content {
-        
-        top: 35vh;
-        h1 {
-            font-size: 8em;
-            font-weight: 400;
+        position: relative;
+        width: 100%;
+        z-index: 1;
+        margin: auto;
+    }
+
+
+
+    .home-text {
+        margin-top: 40vh;
+        color: black;
+
+        .typing {
+            color: $pink;
         }
-        h3 {
-            font-size: 3em;;
-            font-weight: 400;
-        }
+    }
+    
+}
+
+.wave {
+    position: absolute;
+    background-position: cover;
+    top: 0;
+    left: 0;
+}
+
+.wave2 {
+    position: absolute;
+    background-position: cover;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.cta {
+    margin-top: 50px;
+    padding: 40px 120px;
+    background-color: $pink;
+
+    font-size: 2em;
+    color: white;
+    font-weight: bold;
+
+    box-shadow: 1px 1px 10px rgb(173, 173, 173);
+
+    transition: ease-in-out 0.1s;
+    
+    &:hover {
+        transform: scale(1.01);
+        box-shadow: 1px 1px 15px rgb(134, 134, 134);
+    }
+}
+
+@media (max-width: $sm) {
+    .home {
         .cta {
-            margin-top: 30px;
-            background-color: transparent;
-            border: black 5px solid;
+            padding: 20px 60px;
             font-size: 1.5em;
-            color: black;
-            display: inline-block;
-            width: 300px;
-            padding: 25px 0;
-            text-align: center;
-            transition: 0.5s ease;
-
-            &:hover {
-                color: white;
-                background-color: black;
-                animation: fire infinite 2s ease;
-                box-shadow: black 2px 2px 5px;
-            }
-        }
-    }
-    .mobilecta {
-        display: none;
-    }
-}
-
-@media (max-width: $xs) {
-    .home {
-        height: 40vh;
-       // border: black 1px solid;
-        .illustration  {
-            opacity: 0.6;
-            margin-top: 80px;
-            img {
-                max-width: 200px;
-            }
-        }
-        .content {
-            top: 15vh;
-            h1 {
-                font-size: 3em;
-                font-weight: 400;
-            }
-            h3 {
-                font-size: 1em;;
-                font-weight: 400;
-            }
-            .cta {
-                display: none;
-            }
-        }
-        .mobilecta {
-            
-            text-align: center;
-            background-color: transparent;
-            border: black 5px solid;
-            font-size: 1.5em;
-            color: black;
-            display: inline-block;
-            width: 200px;
-            padding: 15px 0;
             margin: auto;
-            margin-top: 30vh;
-            transition: 0.5s ease;
+            margin-top: 60px;
         }
     }
 }
 
-@media (max-width: $sm) and (min-width: $xs) {
-    .home {
-       // border: black 1px solid;
-        .illustration  {
-            opacity: 0.6;
-            margin-top: 80px;
-            img {
-                width: 400px;
-            }
-            .spark1 {
-                position: absolute;
-                z-index: -1;
-            }
-            .spark2 {
-                position: absolute;
-                z-index: -1;
-            }
-        }
-
-    }
-}

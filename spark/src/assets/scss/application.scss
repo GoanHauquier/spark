@@ -36,6 +36,7 @@
     flex: 1 0 auto;
     overflow: hidden;
 }
+
 //    Code goes here
 
 body {
@@ -43,7 +44,7 @@ body {
 }
 
 h1 {
-    font-size: 3em;
+    font-size: 5em;
     font-weight: bold;
 }
 
@@ -75,4 +76,41 @@ p strong {
 
 a {
     text-decoration: none;
+}
+
+@media (max-width: $lg) {
+    h1 {
+        font-size: 2.5em;
+        font-weight: bold;
+    }
+    
+    h2 {
+        font-size: 2em;
+        font-weight: bold;
+    
+        
+    }
+    
+    h3 {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+    
+    h4 {
+        font-size: 1.25em;
+        font-weight: bold;
+    }
+    
+    p {
+        font-size: 1em;
+        line-height: 150%;
+    }
+    
+    p strong {
+        font-weight: bold;
+    }
+    
+    a {
+        text-decoration: none;
+    }
 }

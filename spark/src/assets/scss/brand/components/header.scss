@@ -1,31 +1,28 @@
 // HEADER
+.header-wrapper {
+    margin-top: 30px;
+    position: absolute;
+    z-index: 1000;
+}
 .header {
-    margin-top: 25px;
-    // border: black 5px solid;
-    .desktop-nav {
-        font-size: 1.2em;
-        a {
-            text-transform: uppercase;
-            margin-left: 30px;
-            transition: 0.2s ease;
-        }
-        a:hover {
-            cursor: pointer;
-            padding-bottom: 2px;
-            border-bottom: black 2px solid;
-            transition: 0.2s ease;
-        }
-    }
+    //border: black 5px solid;
+    // margin-top: 45px;
+    
+    // margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 25px;
+    width: 100%;
+
     .signout {
         border: black 1px solid;
-        padding: 5px;
+        padding: 3px;
         transition: 0.2s ease;
-        font-size: 0.8em;
+        font-size: 0.7em;
         
         &:hover {
             background-color: black;
             color: white;
-            font-weight: bold;
         }
     }
     .about {
@@ -38,24 +35,63 @@
             rgb(0, 0, 0) -0.653644px -0.756802px 0px, rgb(0, 0, 0) 0.283662px -0.958924px 0px,
             rgb(0, 0, 0) 0.96017px -0.279415px 0px;      
     }
-}
-.home-title {
-    color: #fff;
-    text-shadow: rgb(0, 0, 0) 1px 0px 0px, rgb(0, 0, 0) 0.540302px 0.841471px 0px,
-                rgb(0, 0, 0) -0.416147px 0.909297px 0px, rgb(0, 0, 0) -0.989992px 0.14112px 0px, 
-                rgb(0, 0, 0) -0.653644px -0.756802px 0px, rgb(0, 0, 0) 0.283662px -0.958924px 0px,
-                rgb(0, 0, 0) 0.96017px -0.279415px 0px;
-    letter-spacing: 5px;
-    font-weight: 400;
-    font-size: 2em;
-    transition: 0.4s ease;
+    .usericon {
+        fill: white;
+        width: 50px;
+    }
 
-    &:hover {
-        text-shadow: rgb(0, 0, 0) -2px 0px 0px, rgb(0, 0, 0) 0.540302px 0.841471px 0px,
-        rgb(0, 0, 0) -0.416147px 0.909297px 0px, rgb(0, 0, 0) -0.989992px 0.14112px 0px, 
-        rgb(0, 0, 0) -0.653644px -0.756802px 0px, rgb(0, 0, 0) 0.283662px -0.958924px 0px,
-        rgb(0, 0, 0) 0.96017px -0.279415px 0px;
-        letter-spacing: 7px;
-        margin-left: 5px;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    margin-left: 0;
+}
+
+.desktop-nav {
+    a {
+        font-size: 1.2em;
+        text-transform: uppercase;
+        transition: 0.2s ease;
+    }
+    a:last-child {
+        margin-right: 75px;
+    }
+    a:hover {
+        cursor: pointer;
+        padding-bottom: 2px;
+        border-bottom: black 2px solid;
+        transition: 0.2s ease;
+    }
+}
+
+@media (max-width: $lg) {
+    .left a {
+        margin-left: 0;
+    }
+    .logo {
+        display: inline;
+    }
+    .text {
+        display: none;
+    }
+}
+
+@media (max-width: $sm) {
+    .header-wrapper {
+        margin-top: 0;
+    }
+}
+
+
+@media (min-width: $lg) {
+    .left a {
+        margin-left: 75px;
+    }
+    .logo {
+        display: none;
+    }
+    .text {
+        display: inline;
     }
 }

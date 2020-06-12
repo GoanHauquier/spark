@@ -1,6 +1,6 @@
 <template>
     <div class="profile ">
-        <div v-if="!userVerified" class="col-12">
+        <div v-if="!userVerified" class="col-12 unverified">
             Verification email sent
             <br>
             <button @click="sendVerificationEmail()">Send another email</button>

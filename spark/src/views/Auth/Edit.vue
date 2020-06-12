@@ -6,7 +6,7 @@
         </div>
         <div>
             Username: 
-            <input type="text" :value="cUserData.cUsername" ref="usernameInput"><br>
+            <input type="text" :value="cUserData.cUsername" maxlength="20" ref="usernameInput"><br>
             Bio: 
             <input type="text" :value="cUserData.cBio" ref="bioInput">
             <br>

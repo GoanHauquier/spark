@@ -1,9 +1,12 @@
 <template>
-    <div>
-        <form @submit.prevent="resetPassword">
-            <input type="email" v-model="email">
-            <button type='submit'>Send email</button>
+    <div class="form-wrapper container-fluid">
+        <div class="form">
+            <h1>Forgot password?</h1><br>
+            <form @submit.prevent="resetPassword">
+            <input class="inputfield" type="email" v-model="email" placeholder="e-mailadress"><br>
+            <input class="formbutton" type="submit" value="Send">
         </form>
+        </div>
     </div>
 </template>
 
@@ -26,8 +29,9 @@ import * as firebase from 'firebase/app';
                         send;
                         this.$router.replace({ name: 'Login' });
                         this.succes();
-                    }).catch(function(error) {
-                        console.log(error);
+                    }).catch(err => {
+                        err;
+                        this.error();
                     });
                 }
                 else {

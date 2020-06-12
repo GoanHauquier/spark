@@ -19,5 +19,7 @@ import Main from './views/Main';
 
 <style lang="scss">
   #app {
+    margin: 0;
+    padding: 0;
   }
 </style>

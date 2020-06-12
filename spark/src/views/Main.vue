@@ -3,6 +3,7 @@
         <div class="top-wrapper"> <!-- Top wrapper -->
             <Header />
             <router-view />
+            
         </div>
         <Footer />
     </div>
