@@ -15,15 +15,15 @@
                 </div>
                 <div class="text-right desktop-nav col-6 header right">
                     <span v-if="loggedIn">
-                        <router-link v-show="user.audio" to="/spark" class="start registration">START</router-link>
-                        <router-link to="/about" class="other">ABOUT</router-link>
-                        <router-link to="/profile" v-bind:class="[{ 'hasNotifications': isActive} , 'registration', 'usericon' ]"><User /></router-link>
-                        <a @click="signOut()" class="signout">SIGN OUT</a>
+                        <router-link v-show="user.audio" to="/spark" class="start registration nav">START</router-link>
+                        <router-link to="/about" class="about nav">ABOUT</router-link>
+                        <router-link to="/profile" v-bind:class="[{ 'hasNotifications': isActive} , 'registration', 'usericon', 'nav' ]"><User /></router-link>
+                        <a @click="signOut()" class="signout nav">SIGN OUT</a>
                     </span>
                     <span v-else>
-                        <router-link to="/about" class="about">About</router-link>
-                        <router-link to="/login" class="registration">Login</router-link>
-                        <router-link to="/register" class="registration">Register</router-link> 
+                        <router-link to="/about" class="about nav">About</router-link>
+                        <router-link to="/login" class="registration nav">Login</router-link>
+                        <router-link to="/register" class="registration nav">Register</router-link> 
                     </span>
                 </div>
         </div>           
@@ -37,7 +37,7 @@ import'firebase/database';
 
 import Spark from '../assets/SVG/logo/spark-text.svg';
 import Logo from '../assets/SVG/logo/logo.svg';
-import User from '../assets/SVG/usericon.svg';
+import User from '../assets/SVG/user.svg';
 
     export default {
         components: {

@@ -22,10 +22,13 @@
     "vue-burger-menu": "^2.0.5",
     "vue-kinesis": "^1.1.5",
     "vue-router": "^3.2.0",
+    "vue-scroll": "^2.1.13",
+    "vue-scrollable-container": "^1.8.2",
     "vue-svg-transition": "^0.2.1",
     "vue-typed-js": "^0.1.2",
     "vue2-dropzone": "^3.6.0",
     "vuefire": "^2.2.2",
+    "vuescroll": "^4.16.0",
     "vuex": "^3.4.0"
   },
   "devDependencies": {

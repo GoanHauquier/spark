@@ -6,16 +6,18 @@ import axios from 'axios'
 import firebase from 'firebase/app'
 import { firestorePlugin } from 'vuefire'
 import { BootstrapVue } from 'bootstrap-vue'
-import './assets/scss/application.scss';
+import './assets/scss/application.scss'
 import VueAudio from 'vue-audio-better'
 import VueNotification from '@mathieustan/vue-notification'
 import SvgTransition from 'vue-svg-transition'
 import VueKinesis from 'vue-kinesis'
 import VueTypedJs from 'vue-typed-js'
+import vuescroll from 'vue-scroll'
 
 // firebase credentials
 import config from './config'
 
+Vue.use(vuescroll)
 Vue.use(VueTypedJs)
 Vue.use(VueKinesis)
 Vue.use(SvgTransition);

@@ -1,16 +1,42 @@
 <template>
-    <div class="friends col-xs-4">
-        <h2>Your Sparks</h2>
+    <div class="friends ">
+        <h3>Your Sparks</h3>
         <input type="text" v-model="searchInput" placeholder="Search Sparks" class="friendsearch">
-        <div v-if="!myMatches[0]">
-            No sparks yet
+
+        
+
+        <div v-if="!myMatches[0]" class="matches">
+   
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+                <p>No sparks yet</p>
+
+
         </div>
-        <div v-else v-for="match in filteredList" :key="match.id" class="friendlist">
+        
+        <div  v-for="match in filteredList" :key="match.id" class="friendlist">
                 <div v-bind:class="[{ '': match.match == 1}, 'match']" @click="removeNotifications(match.id)">
                     <router-link :to="'profile/' + match.id">{{ match.name }}</router-link><br>
                 </div>  
-        </div>
-                           
+        </div>                         
     </div>
 </template>
 
@@ -20,12 +46,41 @@ import 'firebase/firestore';
 import {db} from '../main';
 
     export default {
+        components: {
+        },
         data() {
             return {
                 myMatches: [],
                 counter: 0,
                 id: '',
-                searchInput: ''
+                searchInput: '',
+
+                array: [
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                    'yey',
+                ]
             }
         },
         created () {

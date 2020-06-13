@@ -1,54 +1,67 @@
 <template>
-    <div class="profile ">
-        <div v-if="!userVerified" class="col-12 unverified">
-            Verification email sent
-            <br>
-            <button @click="sendVerificationEmail()">Send another email</button>
-        </div>
-        
-        <div v-else class="profilecontent container">
-            <div class="text-right editbutton col-12">
-                <a><router-link to='/edit'>Edit profile</router-link></a>
+    <div class="profile container-fluid border">
+
+        <div class="container profilepanel">
+            <div v-if="!userVerified" class="col-12 unverified border">
+                Verification email sent
+                <br>
+                <button @click="sendVerificationEmail()">Send another email</button>
             </div>
-
-            <div class="col-12 profilepicture">
-                <img :src="user.picture"><br>
-            </div> 
-
-            <div class="row">
-                <div class="bio col-xs-4">
-                    <h2>{{ user.username }}</h2>
-                    <p>{{ user.bio }}</p>
-                </div>   
-    
-                <div v-if="user.audio" class="col-xs-4 player">
-                    <h2>Audio snippet</h2>
-                    <mini-audio        
-                        :html5="true"
-                        :src="user.audio"
-                        :width="290">
-                        
-                    </mini-audio >
+            
+            <div v-else class="profilecontent container border">
+                <div class="row title">
+                    <div class="text-left col-6">
+                        <h2>Profile</h2>
+                    </div>
+                    <div class="text-right editbutton col-6">
+                        <a><router-link to='/edit'><Settings class="edit" /></router-link></a>
+                    </div>
                 </div>
-                <div v-else>Upload an mp3</div>
 
-                <Friends />
+                <div class="col-sm-12 text-center border">
+                    <img :src="user.picture" class="avatar"><br>
+                </div> 
+
+                <div class="container-fluid border">
+                    <div class="row">
+                        <div class="col-md-6 profileleft">
+                            <div class="bio col-sm-12 border text-left">
+                                <h2>{{ user.username }}</h2>
+                                <p>{{ user.bio }}</p>
+                            </div>   
+                        </div>
+
+                        <Friends class="col-md-6 border" />
+
+                        <div v-if="user.audio" class="col-md-12 text-left border audio">
+                            <h3>Your audio</h3>
+                            <div class="player" >
+                                <mini-audio       
+                                    :html5="true"
+                                    :src="user.audio"
+                                    :width="300">    
+                                </mini-audio >
+                            </div>
+                        </div>
+                        <div v-else class="col-md-12 text-left">Upload an mp3</div>
+
+                        <div class="socials col-md-12 text-center row border">
+                            <a :href="links.soundcloud.link" target="_blank" v-show="links.soundcloud.link != ''">
+                                <div :class="links.soundcloud.class"><Soundcloud class="icon" /></div>
+                            </a>
+                            <a :href="links.spotify.link" target="_blank" v-show="links.spotify.link != ''">
+                                <div :class="links.spotify.class">Spotify</div>
+                            </a>
+                            <a :href="links.instagram.link" target="_blank" v-show="links.instagram.link != ''">
+                                <div :class="links.instagram.class">Instagram</div>
+                            </a>
+                            <a :href="links.facebook.link" target="_blank" v-show="links.facebook.link != ''">
+                                <div :class="links.facebook.class">Facebook</div>
+                            </a>
+                        </div>
+                    </div> 
+                </div>
             </div>
-
-        </div>
-        <div class="socials col-12 text-center row">
-            <a :href="links.soundcloud.link" target="_blank" v-show="links.soundcloud.link != ''">
-                <div :class="links.soundcloud.class"><Soundcloud class="icon" /></div>
-            </a>
-            <a :href="links.spotify.link" target="_blank" v-show="links.spotify.link != ''">
-                <div :class="links.spotify.class">Spotify</div>
-            </a>
-            <a :href="links.instagram.link" target="_blank" v-show="links.instagram.link != ''">
-                <div :class="links.instagram.class">Instagram</div>
-            </a>
-            <a :href="links.facebook.link" target="_blank" v-show="links.facebook.link != ''">
-                <div :class="links.facebook.class">Facebook</div>
-            </a>
         </div>
     </div>
 </template>
@@ -61,7 +74,8 @@ import {db} from '../../main';
 
 import Friends from '../../components/Friends';
 
-import Soundcloud from '../../assets/SVG/socials/soundcloud.svg'
+import Soundcloud from '../../assets/SVG/socials/soundcloud.svg';
+import Settings from '../../assets/SVG/settings.svg';
 
     export default {
         data() {
@@ -78,7 +92,8 @@ import Soundcloud from '../../assets/SVG/socials/soundcloud.svg'
         },
         components: {
             Friends,
-            Soundcloud
+            Soundcloud,
+            Settings,
         },
         created () {
             const user = firebase.auth().currentUser;

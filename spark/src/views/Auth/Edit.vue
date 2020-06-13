@@ -8,7 +8,7 @@
             Username: 
             <input type="text" :value="cUserData.cUsername" maxlength="20" ref="usernameInput"><br>
             Bio: 
-            <input type="text" :value="cUserData.cBio" ref="bioInput">
+            <textarea :value="cUserData.cBio" ref="bioInput"></textarea>
             <br>
             
             <input type="text" :value="cUserData.cLinks.soundcloud" placeholder="Soundcloud" ref="soundcloudInput">

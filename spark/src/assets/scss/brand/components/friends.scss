@@ -11,42 +11,56 @@
 //     }
 // }
 
-.friends {
-    // border: black 1px solid;
-    margin: auto;
-    border-radius: 10%;
-    box-shadow: rgb(201, 195, 195) 1px 1px 10px;
-    max-width: 350px;
-    min-width: 300px;
-    width: 100%;
-    min-height: 350px;
-    padding: 0 15px;
+// .friends {
+//     // border: black 1px solid;
+//     margin: auto;
+//     border-radius: 10%;
+//     box-shadow: rgb(201, 195, 195) 1px 1px 10px;
+//     max-width: 350px;
+//     min-width: 300px;
+//     width: 100%;
+//     min-height: 350px;
+//     padding: 0 15px;
 
-    .friendsearch {
-        width: 100%;
-        //height: 30px;
-    }
-    .friendlist {
-        width: 100%;
-    }
+//     .friendsearch {
+//         width: 100%;
+//         //height: 30px;
+//     }
+//     .friendlist {
+//         width: 100%;
+//     }
 
-    .match {
-        padding-top: 5px;
-        width: 100%;
+//     .match {
+//         padding-top: 5px;
+//         width: 100%;
         
-        a {
-            width: 100%;
-        }
+//         a {
+//             width: 100%;
+//         }
 
-        &:nth-child(2n+2) {
-            background-color: blanchedalmond;
-        }
-    }
+//         &:nth-child(2n+2) {
+//             background-color: blanchedalmond;
+//         }
+//     }
     
-    h2, a, .friendsearch {
-        padding: 10px;
-        line-height: 150%;
-    }
+//     h2, a, .friendsearch {
+//         padding: 10px;
+//         line-height: 150%;
+//     }
+// }
+
+.friends {
+    height: 400px;
+    width: 100%;
+    padding: 30px;
+}
+
+.matches {
+    height: 95%;
+    width: 100%;
+    overflow-x: hidden; 
+    overflow-y: auto; 
+    text-align:justify; 
 }
 
 .hasNotifications {

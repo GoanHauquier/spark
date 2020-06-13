@@ -15,18 +15,16 @@
     width: 100%;
 
     .signout {
-        border: black 1px solid;
-        padding: 3px;
         transition: 0.2s ease;
-        font-size: 0.7em;
+        padding: 3px;
         
         &:hover {
-            background-color: black;
+            background-color: $gray;
             color: white;
         }
     }
     .about {
-        color: black;
+        color: $gray;
     }
     .registration {
         color: white;
@@ -36,8 +34,13 @@
             rgb(0, 0, 0) 0.96017px -0.279415px 0px;      
     }
     .usericon {
-        fill: white;
+        fill: $gray;
         width: 50px;
+
+        &:hover {
+            fill: $pink;
+            border: none;
+        }
     }
 
 }
@@ -60,8 +63,12 @@
     a:hover {
         cursor: pointer;
         padding-bottom: 2px;
-        border-bottom: black 2px solid;
+        border-bottom: $gray 2px solid;
         transition: 0.2s ease;
+    }
+
+    .nav {
+        margin-left: 50px;
     }
 }
 

@@ -2,11 +2,11 @@
     <div class="footer-wrapper container-fluid">
         <div class="row">
                 <div class="text-left footer col-6">
-                    <p>Spark</p>
+                    <p><Logo class="footerlogo" /></p>
                 </div>
                 <div class="text-right col-6 footer">
-                    <a href=""><Facebook /></a>
-                    <a href=""><Instagram /></a>
+                    <a href="" class="footersocial"><Facebook /></a>
+                    <a href="" class="footersocial"><Instagram /></a>
                 </div>
         </div>           
     </div>
@@ -15,11 +15,13 @@
 <script>
 import Facebook from '../assets/SVG/socials/facebook.svg';
 import Instagram from '../assets/SVG/socials/instagram.svg';
+import Logo from '../assets/SVG/logo/logowhite.svg';
 
     export default {
         components: {
             Facebook,
-            Instagram
+            Instagram,
+            Logo
         },
     }
 </script>

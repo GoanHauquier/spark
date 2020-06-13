@@ -1,5 +1,5 @@
 <template>
-  <div class="home">    
+  <div class="home" style="overflow:hidden">    
       <section>
         <div class="container">
           <div v-show="currentUser && !user.audio"><p>Remember to upload an audiofile</p></div>
@@ -24,6 +24,7 @@
             <router-link to='/spark' class="cta">START</router-link>
 
           </div>
+          
         </div>
       </section>
       <!-- <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,128L48,122.7C96,117,192,107,288,117.3C384,128,480,160,576,176C672,192,768,192,864,176C960,160,1056,128,1152,122.7C1248,117,1344,139,1392,149.3L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg> -->
@@ -46,16 +47,18 @@
         </kinesis-container> -->
 
       </div>
+      <Footer style="position:absolute;" />
   </div>
 </template>
 
 <script>
 import * as firebase from 'firebase/app';
+import Footer from './Footer';
 
 export default {
   name: 'Home',
   components: {
-    
+    Footer,
   },
   data() {
     return {
