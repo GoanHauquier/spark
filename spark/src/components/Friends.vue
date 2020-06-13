@@ -5,36 +5,14 @@
 
         
 
-        <div v-if="!myMatches[0]" class="matches">
-   
+        <div v-if="!myMatches[0]" class="matches scroll">
                 <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-                <p>No sparks yet</p>
-
-
         </div>
         
-        <div  v-for="match in filteredList" :key="match.id" class="friendlist">
+        <div  v-for="match in filteredList" :key="match.id" class="friendlist scroll">
                 <div v-bind:class="[{ '': match.match == 1}, 'match']" @click="removeNotifications(match.id)">
                     <router-link :to="'profile/' + match.id">{{ match.name }}</router-link><br>
+                    <hr>
                 </div>  
         </div>                         
     </div>
@@ -54,33 +32,6 @@ import {db} from '../main';
                 counter: 0,
                 id: '',
                 searchInput: '',
-
-                array: [
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                    'yey',
-                ]
             }
         },
         created () {

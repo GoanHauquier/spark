@@ -1,26 +1,25 @@
 <template>
     <div class="footer-wrapper container-fluid">
         <div class="row">
-                <div class="text-left footer col-6">
+                <div class="text-left footer col-4">
                     <p><Logo class="footerlogo" /></p>
                 </div>
-                <div class="text-right col-6 footer">
-                    <a href="" class="footersocial"><Facebook /></a>
-                    <a href="" class="footersocial"><Instagram /></a>
+                <div class="text-right col-8 footer">
+                    <!-- <a href="" class="footersocial"><Facebook /></a> -->
+                    <a href="">Privacy</a>
+                    <a href="">Info</a>
                 </div>
         </div>           
     </div>
 </template>
 
 <script>
-import Facebook from '../assets/SVG/socials/facebook.svg';
-import Instagram from '../assets/SVG/socials/instagram.svg';
+
 import Logo from '../assets/SVG/logo/logowhite.svg';
 
     export default {
         components: {
-            Facebook,
-            Instagram,
+            
             Logo
         },
     }

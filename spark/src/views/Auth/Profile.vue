@@ -3,15 +3,19 @@
 
         <div class="container profilepanel">
             <div v-if="!userVerified" class="col-12 unverified border">
-                Verification email sent
+                <h2>Verification email sent</h2><br>
+                <p>We sent you an email to confirm your email</p>
+                <p>Please confirm your email to continue</p>
                 <br>
-                <button @click="sendVerificationEmail()">Send another email</button>
+                <br>
+                <a class="button" @click="sendVerificationEmail()">Send new email</a><br><br><br>
+                <router-link to="/">Back</router-link>
             </div>
             
             <div v-else class="profilecontent container border">
                 <div class="row title">
                     <div class="text-left col-6">
-                        <h2>Profile</h2>
+                        <h3>Profile</h3>
                     </div>
                     <div class="text-right editbutton col-6">
                         <a><router-link to='/edit'><Settings class="edit" /></router-link></a>
@@ -31,7 +35,7 @@
                             </div>   
                         </div>
 
-                        <Friends class="col-md-6 border" />
+                        <Friends class="col-md-6 border friendwidget" />
 
                         <div v-if="user.audio" class="col-md-12 text-left border audio">
                             <h3>Your audio</h3>
@@ -43,20 +47,28 @@
                                 </mini-audio >
                             </div>
                         </div>
-                        <div v-else class="col-md-12 text-left">Upload an mp3</div>
+                        <div v-else class="col-md-12 text-left">
 
+                            <router-link to="/edit">
+                                <h3 class="uploadaudio">
+                                    Upload an mp3 file
+                                </h3>
+                            </router-link>
+
+                    </div>
                         <div class="socials col-md-12 text-center row border">
+                            
                             <a :href="links.soundcloud.link" target="_blank" v-show="links.soundcloud.link != ''">
-                                <div :class="links.soundcloud.class"><Soundcloud class="icon" /></div>
+                                <div :class="links.soundcloud.class"><img src="../../assets/images/socials/soundcloud.png" alt="soundcloud logo"></div>
                             </a>
                             <a :href="links.spotify.link" target="_blank" v-show="links.spotify.link != ''">
-                                <div :class="links.spotify.class">Spotify</div>
+                                <div :class="links.spotify.class"><img src="../../assets/images/socials/spotify.png" alt="spotify logo"></div>
                             </a>
                             <a :href="links.instagram.link" target="_blank" v-show="links.instagram.link != ''">
-                                <div :class="links.instagram.class">Instagram</div>
+                                <div :class="links.instagram.class"><img src="../../assets/images/socials/instagram.png" alt="instagram logo"></div>
                             </a>
                             <a :href="links.facebook.link" target="_blank" v-show="links.facebook.link != ''">
-                                <div :class="links.facebook.class">Facebook</div>
+                                <div :class="links.facebook.class"><img src="../../assets/images/socials/facebook.png" alt="facebook logo"></div>
                             </a>
                         </div>
                     </div> 
@@ -74,7 +86,6 @@ import {db} from '../../main';
 
 import Friends from '../../components/Friends';
 
-import Soundcloud from '../../assets/SVG/socials/soundcloud.svg';
 import Settings from '../../assets/SVG/settings.svg';
 
     export default {
@@ -92,7 +103,6 @@ import Settings from '../../assets/SVG/settings.svg';
         },
         components: {
             Friends,
-            Soundcloud,
             Settings,
         },
         created () {

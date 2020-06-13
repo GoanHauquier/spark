@@ -11,6 +11,7 @@ import Edit from '../views/Auth/Edit.vue'
 import Matching from '../views/matching/Matching.vue'
 import Testing from '../views/matching/Testing.vue'
 import Admin from '../views/admin/Admin.vue'
+import Error404 from '../views/Error404.vue'
 
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -95,6 +96,12 @@ Vue.use(VueRouter)
     name: 'Reset',
     component: ForgotPassword,
   },
+  {
+    path: '*',
+    name: '404',
+    component: Error404,
+  },
+
 ]
 
 const router = new VueRouter({

@@ -1,7 +1,7 @@
 <template>
-    <div class="form-wrapper container-fluid">
+    <div class="form-wrapper register container-fluid">
         
-        <div class="form">
+        <div class="form ">
 
             <div v-if="error">
                 {{ error.message }}

@@ -19,7 +19,7 @@
           <div v-else class="content row">
 
             <div class="col-12 home-text">
-              <h1>WELCOME  {{user.username}}</h1>
+              <h1>Welcome  {{user.username}}</h1>
             </div>
             <router-link to='/spark' class="cta">START</router-link>
 

@@ -1,15 +1,24 @@
 <template>
-    <div>
+    <div class="matching-wrapper">
         <div v-if="potentialMatches.length > 0 && !arrayEmpty">
-            <h3>{{ potentialMatches[counter].username }}</h3>
             <mini-audio      
                 
                 :html5="true"
                 :src="potentialMatches[counter].audio"
             >
             </mini-audio>
-            <button @click="likeUser()">Like</button>
-            <button @click="addUserToDB()">Next</button>
+            <h3>Like what you hear?</h3>
+            <div class="row panel">
+                
+                <!-- <button @click="likeUser()">Like</button> -->
+                <div class="judgebutton heart">
+                    <a class=""><Heart /></a>
+                </div>
+                <!-- <button @click="addUserToDB()">Next</button> -->
+                <div class="judgebutton cross">
+                    <a class=""><Cross /></a>
+                </div>
+            </div>
         </div>
         <div v-else-if="(potentialMatches.length == 0 || arrayEmpty) && !noUsers">
             loading
@@ -26,7 +35,14 @@ import'firebase/database';
 import 'firebase/firestore';
 import {db} from '../../main';
 
+import Cross from '../../assets/SVG/cross.svg';
+import Heart from '../../assets/SVG/heart.svg';
+
     export default {
+        components: {
+            Cross,
+            Heart
+        },
         data() {
             return {
                 count: 0,

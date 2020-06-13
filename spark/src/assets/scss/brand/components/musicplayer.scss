@@ -1,5 +1,36 @@
 .vueAudioBetter {
     background-image: none !important;
-    background-color: red !important;
+    // background-color: red !important;
     margin: auto !important;
+    width: 400px !important;
+    height: 90px !important;
+    background-image: url(../../assets/images/backgroundplayer.png) !important;
+    background-position: center !important;
+    background-size: cover !important;
+
+    span {
+        font-size: 16px !important;
+        &:last-child {
+            // display: none;
+        }
+    }
+
+    .progressInfo, .process {
+        color: black !important;
+        background: $gray !important;
+    }
+    .block {
+        border: $gray 1px solid !important;
+    }
+}
+
+@media (max-width: $sm) {
+
+    .vueAudioBetter {
+        width: 100% !important;
+    }
+    .slider {
+        display: none !important;
+        
+    }
 }

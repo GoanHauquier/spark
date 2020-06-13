@@ -1,16 +1,46 @@
 <template>
-    <div>
-        <div v-if="started">
-            <Matching
-                :potentialMatches="usersData"
-                :arrayLength="arrayLength"
-                :noUsers="noUsers"
-                @clicked="emptyArray"
-            /> 
-        </div>  
-        <div v-else>
-            <button @click="getPotentialMatches()">Start</button>
-        </div>  
+    <div class="startpage container-fluid">
+        <div class="container starttext">
+
+            <div v-if="started" class="judging text-center">
+                <Matching
+                    :potentialMatches="usersData"
+                    :arrayLength="arrayLength"
+                    :noUsers="noUsers"
+                    @clicked="emptyArray"
+                /> 
+            </div>  
+            <div v-else class="">
+                <div class="left">
+                    <h1>Enter the Queue</h1>
+                    <vue-typed-js :strings="['artists^2000', 'friends^2000', 'musicians^2000']" :loop="true" :showCursor="false" :typeSpeed="50">
+                        <h2>Meet <span class="typing"></span></h2>
+                    </vue-typed-js>
+                    <div class="" @click="getPotentialMatches()">
+                        <div class="buttonfade ">
+                            <ParticleBtn 
+                                ref="start"
+                                class="startbtn"
+                                :visible.sync="btnOps.visible"
+                                :animating.sync="btnOps.animating"
+                                :options="btnOps"
+                                cls="btn-cls">
+                                Enter
+                            </ParticleBtn>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+            <!-- <div v-else class="startbtn">
+                <a class="" ref="start" @click="getPotentialMatches(), pop()">Start</a>
+            </div>   -->
+        </div>
+        <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#fff" fill-opacity="1" d="M0,128L48,144C96,160,192,192,288,176C384,160,480,96,576,85.3C672,75,768,117,864,144C960,171,1056,181,1152,181.3C1248,181,1344,171,1392,165.3L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+        </svg>
+
     </div>
 </template>
 
@@ -22,9 +52,12 @@ import {db} from '../../main';
 
 import Matching from './Matching';
 
+import ParticleBtn from "vue-particle-effect-buttons";
+
     export default {
         components: {
             Matching,
+            ParticleBtn,
         },
         data() {
             return {
@@ -32,8 +65,30 @@ import Matching from './Matching';
                 usersData: [],
                 started: false,
                 arrayLength: 0,
-                noUsers: false
+                noUsers: false,
+
+                btnOps: {
+                    type: "circle",
+                    style: 'fill',
+                    easing: "easeOutQuart",
+                    size: 4,
+                    direction: 'bottom',
+                    particlesAmountCoefficient: 2,
+                    oscillationCoefficient: 5,
+                    color: function () {
+                    return Math.random() < 0.5 ? "#eb9788" : "#ffffff";
+                    },
+                    onComplete: () => {  
+                    },
+                    onBegin: () => {
+                    },
+                    visible: true,
+                    animating: false
+                },
             }
+        },
+        mounted () {
+
         },
         created () {
             // check for online users
@@ -95,6 +150,10 @@ import Matching from './Matching';
             });
         },
         methods: {
+            // Animation
+            
+
+            // Technical stuff
             getPotentialMatches() {
                 const uid = firebase.auth().currentUser.uid;
                 // get users from database based on when they last logged in
@@ -160,7 +219,7 @@ import Matching from './Matching';
                     })
                 })
                 // start the matching process
-                this.started = true;
+                setTimeout(() => this.started = true, 2000);
             },
             emptyArray() {
                 this.started = false;

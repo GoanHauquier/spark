@@ -1,31 +1,61 @@
 <template>
-    <div class="edit">
-        <h1>Settings</h1>
-        <div class="text-right">
-            <a><router-link to='/profile'>Back</router-link></a>
-        </div>
-        <div>
-            Username: 
-            <input type="text" :value="cUserData.cUsername" maxlength="20" ref="usernameInput"><br>
-            Bio: 
-            <textarea :value="cUserData.cBio" ref="bioInput"></textarea>
-            <br>
+    <div class="form-wrapper container-fluid">
+        <div class="edit form container profile">
+            <div class="row">
+                <div class="text-left col-6">
+                    <h3>Edit profile</h3>
+                </div>
+                <div class="text-right col-6">
+                    <a><router-link to='/profile'><Back class="back" /></router-link></a>
+                </div>
+            </div>
+
+            <img class="picture" :src="cUserData.cPicture" ref="myImg">
+
+            <div class="row edittop">
+                <div class="col-sm-6">
+                    <p class="text-left" style="font-weight:bold;">Picture (1MB Max)</p>
+
+                    <div class="file-upload">
+                        <label for="avatar" class="file-upload__label">Upload new picture</label>
+                        <input id="avatar" class="file-upload__input" @change="getFile()" type="file" ref="myFile" name="file-upload">
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="text-left" style="font-weight:bold;">Audio (1MB Max)</p>
+                    <div class="file-upload">
+                        <label for="upload" class="file-upload__label">Upload audiofile</label>
+                        <input id="upload" class="file-upload__input" @change="getAudio()" type="file" ref="myAudio" name="file-upload">
+                    </div>
+                </div>
+
+            </div>
+
+            <hr>
             
-            <input type="text" :value="cUserData.cLinks.soundcloud" placeholder="Soundcloud" ref="soundcloudInput">
-            <input type="text" :value="cUserData.cLinks.spotify" placeholder="Spotify" ref="spotifyInput">
-            <input type="text" :value="cUserData.cLinks.facebook" placeholder="Facebook" ref="facebookInput">
-            <input type="text" :value="cUserData.cLinks.instagram" placeholder="Instagram" ref="instagramInput">
-            <br>
-            <button @click="editProfile()"><a href="/edit">Save info</a></button>
-            <img :src="cUserData.cPicture" ref="myImg"><br>
-            profile picture
-            <input type="file" @change="getFile()" ref="myFile">
-            <!-- <button v-show="hasFile" @click="editPicture()">Save img</button> -->
-            <br>
-            audio (max 1mb)
-            <input type="file" @change="getAudio()" ref="myAudio">
-            <!-- <button v-show="hasAudio" @click="editAudio()">Save audio</button> -->
-            
+            <div class="row editbottom">
+                <div class="col-sm-6">
+                    <p class="text-left" style="font-weight:bold;">Username</p>
+                    <input type="text" :value="cUserData.cUsername" maxlength="20" class="inputfield inputedit" ref="usernameInput">
+
+                    <p class="text-left" style="font-weight:bold;">Bio</p>
+                    <textarea :value="cUserData.cBio" ref="bioInput" maxlength="255" placeholder="My bio"></textarea>
+                </div>
+                
+                <div class="col-sm-6">
+                    <p class="text-left" style="font-weight:bold;">Socials</p>
+                    <input type="text" :value="cUserData.cLinks.soundcloud" placeholder="Soundcloud" ref="soundcloudInput" class="inputfield inputedit">
+                    <input type="text" :value="cUserData.cLinks.spotify" placeholder="Spotify" ref="spotifyInput" class="inputfield inputedit">
+                    <input type="text" :value="cUserData.cLinks.facebook" placeholder="Facebook" ref="facebookInput" class="inputfield inputedit">
+                    <input type="text" :value="cUserData.cLinks.instagram" placeholder="Instagram" ref="instagramInput" class="inputfield inputedit">
+                    <br>
+                    <div class="text-right">
+                        <a><input class="formbutton formbuttonsmall" type="submit" value="Save" @click="editProfile()"></a>
+                    </div>
+                </div>
+                
+            </div>
         </div>
     </div>
 </template>
@@ -35,7 +65,12 @@ import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import {db} from '../../main';
 
+import Back from '../../assets/SVG/exit.svg';
+
     export default {
+        components: {
+            Back,
+        },
         data() {
             return {
                 id: '',
@@ -56,14 +91,16 @@ import {db} from '../../main';
                 hasFile: false,
                 audio: {},
                 hasAudio: false,
-                user: {},
+                cUser: {},
             }
         },
         created () {
             // fetch user data
-            this.user = firebase.auth().currentUser;
-            this.id = this.user.uid;
+            this.cUser = firebase.auth().currentUser;
+            this.id = this.cUser.uid;
             this.id = this.id.toString();
+
+            this.$store.dispatch('fetchUserData');
 
             // fetch user data from firestore
             db.collection('users')
@@ -101,10 +138,10 @@ import {db} from '../../main';
                 this.editAudio();
             },
             editPicture() {
-                const user = this.user;
+                const user = this.cUser;
 
                 // make new storage record uniquely for the user and add the uploaded file
-                const storageRef = firebase.storage().ref('users/' + this.user.uid + '/profile' + Date.now().toString() + '.jpg');
+                const storageRef = firebase.storage().ref('users/' + this.cUser.uid + '/profile' + Date.now().toString() + '.jpg');
 
                 if (this.file && this.file.size < 1024 * 1024) {
                     // create new path in storage
@@ -131,10 +168,10 @@ import {db} from '../../main';
                 }
             },
             editAudio() {
-                const user = this.user;
+                const user = this.cUser;
 
                 // make new storage record uniquely for the user and add the uploaded file
-                const storageRef = firebase.storage().ref('audio/' + this.user.uid + '/audio.mp3');
+                const storageRef = firebase.storage().ref('audio/' + this.cUser.uid + '/audio.mp3');
                 console.log(storageRef);
 
                 if (this.audio && this.audio.size < 1024 * 1024) {
@@ -169,7 +206,7 @@ import {db} from '../../main';
                 const newInstagram = this.$refs.instagramInput.value;
 
                 db.collection("users")
-                .doc(this.user.uid)
+                .doc(this.cUser.uid)
                 .update({
                     links: {
                         soundcloud: {
@@ -208,6 +245,7 @@ import {db} from '../../main';
                     this.$refs.bioInput.value = newBio;
                     this.$refs.usernameInput.value = newUsername;
                     this.addLinks();
+                    this.saved();
                 }
                 else {
                     alert('error');
@@ -265,8 +303,24 @@ import {db} from '../../main';
                         },
                     },
                 });
+            },
+            saved () {
+                this.$notify({
+                    message: 'Saved!',
+                    top: true,
+                    right: true,
+                    type: 'succes',
+                    theme: {
+                        colors: {
+                            succes: '#fofofo',
+                        },
+                    },
+                });
             }
         },
+        user () {
+             return this.$store.getters.user;
+        }
         
     }
 </script>

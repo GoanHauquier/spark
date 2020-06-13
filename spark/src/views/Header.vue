@@ -15,7 +15,7 @@
                 </div>
                 <div class="text-right desktop-nav col-6 header right">
                     <span v-if="loggedIn">
-                        <router-link v-show="user.audio" to="/spark" class="start registration nav">START</router-link>
+                        <router-link v-show="user.audio" to="/spark" class="start registration nav">QUEUE</router-link>
                         <router-link to="/about" class="about nav">ABOUT</router-link>
                         <router-link to="/profile" v-bind:class="[{ 'hasNotifications': isActive} , 'registration', 'usericon', 'nav' ]"><User /></router-link>
                         <a @click="signOut()" class="signout nav">SIGN OUT</a>
@@ -61,11 +61,13 @@ import User from '../assets/SVG/user.svg';
                     this.id = firebase.auth().currentUser.uid;
 
                     firebase.database().ref('status/' + this.id).on('value', snapshot => {
-                        if (snapshot.val().hasNotification) {
-                            this.isActive = true;
-                        }
-                        else {
-                            this.isActive = false;
+                        if (snapshot.val() != null) {
+                            if (snapshot.val().hasNotification) {
+                                this.isActive = true;
+                            }
+                            else {
+                                this.isActive = false;
+                            }
                         }
                     });
                 }
