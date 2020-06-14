@@ -1,30 +1,32 @@
 <template>
-    <div class="matching-wrapper">
+    <div class="matching-wrapper fade-in">
         <div v-if="potentialMatches.length > 0 && !arrayEmpty">
+            <h2 class="artist-title">{{ quotes[number] }}</h2>
             <mini-audio      
-                
                 :html5="true"
                 :src="potentialMatches[counter].audio"
             >
             </mini-audio>
             <h3>Like what you hear?</h3>
             <div class="row panel">
-                
                 <!-- <button @click="likeUser()">Like</button> -->
-                <div class="judgebutton heart">
+                <div  @click="likeUser()" class="judgebutton heart">
                     <a class=""><Heart /></a>
                 </div>
                 <!-- <button @click="addUserToDB()">Next</button> -->
-                <div class="judgebutton cross">
+                <div @click="addUserToDB()" class="judgebutton cross">
                     <a class=""><Cross /></a>
                 </div>
             </div>
         </div>
         <div v-else-if="(potentialMatches.length == 0 || arrayEmpty) && !noUsers">
-            loading
+            loading new users...
         </div>
         <div v-else-if="noUsers">
-            No more users in the queue, please come back later...
+            <h1>Oh no!</h1>
+            <p>No more users in <u>the Queue</u>, please come back later...</p>
+
+            <router-link to='/' class="back-btn">Back</router-link>
         </div>
     </div>
 </template>
@@ -50,7 +52,13 @@ import Heart from '../../assets/SVG/heart.svg';
                 userList: [],
                 arrayEmpty: false,
                 id: '',
-                audioState: 'paused'
+                audioState: 'paused',
+                quotes: [
+                    'Anonymous artist',
+                    'Anonymous sparker',
+                    'Anonymous musical mastermind',
+                ],
+                number: 0
             }
         },
         props: [
@@ -75,6 +83,12 @@ import Heart from '../../assets/SVG/heart.svg';
                     this.reload();
                 }
                 else {
+                    if (this.number < 2) {
+                        this.number++;
+                    }
+                    else  {
+                        this.number = 0;
+                    }
                     // if not, counter + 1
                     this.counter++;
                 }
@@ -95,6 +109,8 @@ import Heart from '../../assets/SVG/heart.svg';
                 }).then(this.next());
             },
             likeUser() {
+                this.right = true;
+                setTimeout(() => this.right == false, 5000);
                 firebase.database().ref('status/' + this.potentialMatches[this.counter].id + '/pending/' + this.id).once('value', snapshot => {
                     
                     if (snapshot.val() == null) {
@@ -142,8 +158,10 @@ import Heart from '../../assets/SVG/heart.svg';
                         .update({
                             hasNotification: true
                         });
+                        
                         this.newMatch();
                         this.addUserToDB();
+                        
                     }   
                 })
             },
@@ -155,7 +173,7 @@ import Heart from '../../assets/SVG/heart.svg';
                     type: 'succes',
                     theme: {
                         colors: {
-                            succes: '#fofofo',
+                            succes: '#eb9788',
                         },
                     },
                 });

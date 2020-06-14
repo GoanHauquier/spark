@@ -1,7 +1,7 @@
 <template>
   <div class="home" style="overflow:hidden">    
       <section>
-        <div class="container">
+        <div class="container fade-in">
           <div v-show="currentUser && !user.audio"><p>Remember to upload an audiofile</p></div>
 
           <div v-if="!currentUser" class="content row">
@@ -13,7 +13,6 @@
               </vue-typed-js>
             </div>
             <router-link to='/register' class="cta">GET STARTED</router-link>
-
           </div>
 
           <div v-else class="content row">
@@ -21,7 +20,8 @@
             <div class="col-12 home-text">
               <h1>Welcome  {{user.username}}</h1>
             </div>
-            <router-link to='/spark' class="cta">START</router-link>
+            <router-link v-if="user.audio != ''" to='/spark' class="cta">START</router-link>
+            <router-link v-else to='/profile' class="cta">GET STARTED</router-link>
 
           </div>
           

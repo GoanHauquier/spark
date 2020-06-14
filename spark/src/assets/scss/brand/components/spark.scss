@@ -8,12 +8,15 @@
         }
     }
 
+    .artist-title {
+        margin-bottom: 60px;
+    }
+
     .particles-button {
         font-size: 2em !important;
         font-weight: bold !important;
         background-color: $pink !important;
         padding: 40px 120px !important;
-        margin-top: 50px;
         border-radius: 0 !important;
     }
 
@@ -27,6 +30,10 @@
         h1 {
             margin-bottom: 15px;
         }
+    }
+
+    .typingtext {
+        margin-bottom: 30px;
     }
       
     .judgebutton {
@@ -42,6 +49,17 @@
         }
 
         transition: ease 0.1s;
+
+    }
+
+    .back-btn {
+        background-color: $pink;
+        color: white;
+        padding: 10px 30px;
+    }
+
+    p {
+        margin-bottom: 60px;
     }
 
     .panel {
@@ -72,6 +90,8 @@
         }
     }
 }
+
+
 
 @keyframes grow {
     80% {
@@ -109,5 +129,18 @@
 
         transition: ease 0.1s;
     }
-
+    .starttext {
+        padding-top: 30vh !important;
+    }
 }
+
+.circle {
+    border-radius: 50%;
+    border: 10px solid red;
+    width: 100px;
+    height: 100px;
+
+    z-index: -5;
+}
+
+

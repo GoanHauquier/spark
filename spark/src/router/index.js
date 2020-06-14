@@ -13,6 +13,8 @@ import Testing from '../views/matching/Testing.vue'
 import Admin from '../views/admin/Admin.vue'
 import Error404 from '../views/Error404.vue'
 
+import Burger from '../components/Burger.vue'
+
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -97,6 +99,11 @@ Vue.use(VueRouter)
     component: ForgotPassword,
   },
   {
+    path: '/menu',
+    name: 'Menu',
+    component: Burger,
+  },
+  {
     path: '*',
     name: '404',
     component: Error404,
@@ -105,7 +112,7 @@ Vue.use(VueRouter)
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes
 })

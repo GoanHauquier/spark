@@ -72,8 +72,24 @@
 
     .uploadaudio {
         margin: 60px auto;
+        animation: bouncing 2s infinite ease-in-out;
+    }
 
-        
+    @keyframes bouncing {
+        10% {
+            transform: translateY(-10px);
+        }
+        15% {
+            transform: translateY(0);
+        }
+        25% {
+            transform: translateY(-10px);
+        }
+        30% {
+            transform: translateY(0);
+        }
+        100% {
+        }
     }
 
     .bio, .audio {

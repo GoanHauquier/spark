@@ -1,6 +1,10 @@
 <template>
     <div class="startpage container-fluid">
-        <div class="container starttext">
+
+
+
+        <div class="container starttext fade-in">
+
 
             <div v-if="started" class="judging text-center">
                 <Matching
@@ -9,15 +13,17 @@
                     :noUsers="noUsers"
                     @clicked="emptyArray"
                 /> 
-            </div>  
+            </div>
             <div v-else class="">
                 <div class="left">
                     <h1>Enter the Queue</h1>
-                    <vue-typed-js :strings="['artists^2000', 'friends^2000', 'musicians^2000']" :loop="true" :showCursor="false" :typeSpeed="50">
-                        <h2>Meet <span class="typing"></span></h2>
-                    </vue-typed-js>
+                    <div class="typingtext">
+                        <vue-typed-js :strings="['artists^2000', 'friends^2000', 'musicians^2000']" :loop="true" :showCursor="false" :typeSpeed="50">
+                            <h2>Meet <span class="typing"></span></h2>
+                        </vue-typed-js>
+                    </div>
                     <div class="" @click="getPotentialMatches()">
-                        <div class="buttonfade ">
+                        <div class="buttonfade">
                             <ParticleBtn 
                                 ref="start"
                                 class="startbtn"
@@ -29,7 +35,6 @@
                             </ParticleBtn>
                         </div>
                     </div>
-                    
                 </div>
 
             </div>
@@ -157,8 +162,8 @@ import ParticleBtn from "vue-particle-effect-buttons";
             getPotentialMatches() {
                 const uid = firebase.auth().currentUser.uid;
                 // get users from database based on when they last logged in
-                firebase.database().ref('status').orderByChild('last_changed').limitToLast(50).once('value', snapshot => {
-
+                firebase.database().ref('status').limitToLast(50).once('value', snapshot => {
+// .orderByChild('last_changed')
                     // initialize arrays
                     const metUsers = [];
                     this.noUsers = false;
@@ -222,7 +227,7 @@ import ParticleBtn from "vue-particle-effect-buttons";
                 setTimeout(() => this.started = true, 2000);
             },
             emptyArray() {
-                this.started = false;
+                // this.started = false;
                 // empty the arrays
                 this.userList = [];
                 this.usersData = [];

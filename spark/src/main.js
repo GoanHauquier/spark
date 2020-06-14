@@ -12,10 +12,13 @@ import VueNotification from '@mathieustan/vue-notification'
 import SvgTransition from 'vue-svg-transition'
 import VueKinesis from 'vue-kinesis'
 import VueTypedJs from 'vue-typed-js'
+import VueAnimate from 'vue-animate-scroll'
 
 // firebase credentials
 import config from './config'
 
+
+Vue.use(VueAnimate)
 Vue.use(VueTypedJs)
 Vue.use(VueKinesis)
 Vue.use(SvgTransition)

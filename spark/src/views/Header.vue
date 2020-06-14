@@ -1,5 +1,7 @@
 <template>
+<div>
     <div class="header-wrapper container-fluid">
+
         <div class="row">
                 <div class="text-left header col-6 left text">
                     <router-link to="/">
@@ -7,12 +9,13 @@
                         <Spark class="svg text" />
                     </router-link>
                 </div>
-                <div class="text-left header col-6 left logo">
+                <div class="text-left header col-3 left logo">
                     <router-link to="/">
                         <!-- <h3 class="home-title">SPARK</h3> -->
                         <Logo class="svg logo" />
                     </router-link>
                 </div>
+
                 <div class="text-right desktop-nav col-6 header right">
                     <span v-if="loggedIn">
                         <router-link v-show="user.audio" to="/spark" class="start registration nav">QUEUE</router-link>
@@ -26,8 +29,10 @@
                         <router-link to="/register" class="registration nav">Register</router-link> 
                     </span>
                 </div>
-        </div>           
+        </div>    
     </div>
+</div>
+    
 </template>
 
 <script>
@@ -39,11 +44,12 @@ import Spark from '../assets/SVG/logo/spark-text.svg';
 import Logo from '../assets/SVG/logo/logo.svg';
 import User from '../assets/SVG/user.svg';
 
+
     export default {
         components: {
             Spark,
             Logo,
-            User
+            User,
         },
         data() {
             return {
@@ -51,6 +57,11 @@ import User from '../assets/SVG/user.svg';
                 activeClass: 'hasNotifications',
                 isActive: false,
                 id: '',
+                size: {
+                    width: 48,
+                    height: 48
+                },
+                burgerActive: false
             }
         },
         created () {
