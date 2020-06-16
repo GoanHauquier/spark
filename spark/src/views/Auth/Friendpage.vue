@@ -5,8 +5,11 @@
             
             <div class="profilecontent container border">
                 <div class="row title">
-                    <div class="text-left col-12">
+                    <div class="text-left col-6">
                         <h2>{{ userData.username }}'s profile</h2>
+                    </div>
+                    <div class="text-right col-6">
+                        <router-link to='/profile'><Back /></router-link>
                     </div>
                 </div>
 
@@ -24,7 +27,7 @@
                         </div>
 
                         <div v-if="userData.audio" class="col-md-12 text-center border audio">
-                            <h3>Your audio</h3>
+                            <h3>{{ userData.username }}'s' audio</h3>
                             <div class="player" >
                                 <mini-audio       
                                     :html5="true"
@@ -65,7 +68,12 @@
 import {db} from '../../main';
 import 'firebase/firestore';
 
+import Back from '../../assets/SVG/exit.svg';
+
     export default {
+        components: {
+            Back,
+        },
         data() {
             return {
                 id: this.$route.params.id,

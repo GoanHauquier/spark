@@ -1,7 +1,7 @@
 <template>
   <div class="about-wrapper container-fluid">
     <div class="container about-content">
-        <h1>About SPARK</h1>
+        <h1>About Spark</h1>
         <p>Spark is a project to <u >connect</u> and <u>inspire</u> all musicians, singers and producers alike.</p>
         <p>Gone are the days of looking for people to collaborate with based on their status.</p>
         <p>With Spark we aim to connect people entirely based on their music.</p>

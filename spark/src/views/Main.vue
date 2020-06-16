@@ -65,7 +65,7 @@ import Footer from './Footer';
         },
         watch: {
             '$route' (to, from) { // eslint-disable-line no-unused-vars
-                document.title = to.meta.title || 'Your Website'
+                document.title = to.meta.title || 'Spark'
             }
         },
     }
