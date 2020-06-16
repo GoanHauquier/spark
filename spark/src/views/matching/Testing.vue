@@ -163,13 +163,9 @@ import ParticleBtn from "vue-particle-effect-buttons";
                 const uid = firebase.auth().currentUser.uid;
                 // get users from database based on when they last logged in
                 firebase.database().ref('status').limitToLast(50).once('value', snapshot => {
-// .orderByChild('last_changed')
                     // initialize arrays
                     const metUsers = [];
                     this.noUsers = false;
-
-                        console.log('looking for potential matches');
-
                         // fill array with id's of users you've already met from firestore
                         db.collection('matches')
                         .doc(uid)
@@ -179,9 +175,6 @@ import ParticleBtn from "vue-particle-effect-buttons";
                             snap.forEach(el => {
                                 metUsers.push(el.id);
                             });
-
-                            console.log('filling list');
-
                             // fill array with users you've not met based on the previous array
                             snapshot.forEach(el => {
                             if (metUsers.includes(el.val().id) || el.val().id == uid) {
@@ -196,8 +189,6 @@ import ParticleBtn from "vue-particle-effect-buttons";
                                 }
                             }
                         });
-                        console.log('getting users data');
-
                         // fill a new array with data objects from the selected users
                         this.userList.forEach(doc => {
                             db.collection('users')
@@ -219,8 +210,6 @@ import ParticleBtn from "vue-particle-effect-buttons";
                         if (this.arrayLength == 0) {
                             this.noUsers = true;
                         }
-                        
-                        console.log('data pending');
                     })
                 })
                 // start the matching process

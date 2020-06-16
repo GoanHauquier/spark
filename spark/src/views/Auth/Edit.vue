@@ -20,6 +20,9 @@
                         <label for="avatar" class="file-upload__label">Upload new picture</label>
                         <input id="avatar" class="file-upload__input" @change="getFile()" type="file" ref="myFile" name="file-upload">
                     </div>
+                    <div class="progressbar">
+                        <div class="status" ref="uploadbarimage"></div>
+                    </div>                    
                 </div>
 
                 <div class="col-sm-6">
@@ -28,6 +31,10 @@
                         <label for="upload" class="file-upload__label">Upload audiofile</label>
                         <input id="upload" class="file-upload__input" @change="getAudio()" type="file" ref="myAudio" name="file-upload">
                     </div>
+                    <div class="progressbar">
+                        <div class="status" ref="uploadbaraudio"></div>
+                    </div>
+
                 </div>
 
             </div>
@@ -92,6 +99,9 @@ import Back from '../../assets/SVG/exit.svg';
                 audio: {},
                 hasAudio: false,
                 cUser: {},
+                progressUpload: 0,
+                uploadTask: '',
+                uploading: false
             }
         },
         created () {
@@ -122,7 +132,46 @@ import Back from '../../assets/SVG/exit.svg';
                 }
             })
         },
+        watch: {
+            uploadTask: function() {
+                this.uploadTask.on('state_changed', sp => {
+                    this.progressUpload = Math.floor(sp.bytesTransferred / sp.totalBytes * 100);
+                    console.log(this.progressUpload);
+                })
+                
+            }
+        },
         methods: {
+            uploadImage() {
+                const elem = this.$refs.uploadbarimage;
+                let width = this.progressUpload;  
+                
+                const id = setInterval(frame, 10);
+                function frame() {
+                    if (width >= 100) {
+                        clearInterval(id);
+                        elem.style.width = 0;
+                    } else {
+                        width++; 
+                        elem.style.width = width + '%'; 
+                    }
+                }
+            },
+            uploadAudio() {
+                const elem = this.$refs.uploadbaraudio;
+                let width = this.progressUpload;  
+                
+                const id = setInterval(frame, 10);
+                function frame() {
+                    if (width >= 100) {
+                        clearInterval(id);
+                        elem.style.width = 0;
+                    } else {
+                        width++; 
+                        elem.style.width = width + '%'; 
+                    }
+                }
+            },
             getFile() {
                 // get the uploaded file
                 this.file = this.$refs.myFile.files[0];
@@ -139,18 +188,20 @@ import Back from '../../assets/SVG/exit.svg';
             },
             editPicture() {
                 const user = this.cUser;
+                this.uploadImage();
 
                 // make new storage record uniquely for the user and add the uploaded file
                 const storageRef = firebase.storage().ref('users/' + this.cUser.uid + '/profile' + Date.now().toString() + '.jpg');
 
                 if (this.file && this.file.size < 1024 * 1024) {
+
+                    this.uploadTask = storageRef.put(this.file);
                     // create new path in storage
-                    storageRef.put(this.file).then(e => {
+                    this.uploadTask.then(e => {
                         e;
                         const id = user.uid;
                         console.log('Uploaded!');
                         storageRef.getDownloadURL().then(imgUrl => {
-                            console.log(imgUrl);
                             // set firestore data equal to new data
                             db.collection("users").doc(id).update({
                                 picture: imgUrl,
@@ -169,19 +220,20 @@ import Back from '../../assets/SVG/exit.svg';
             },
             editAudio() {
                 const user = this.cUser;
+                this.uploadAudio();
 
                 // make new storage record uniquely for the user and add the uploaded file
                 const storageRef = firebase.storage().ref('audio/' + this.cUser.uid + '/audio.mp3');
-                console.log(storageRef);
 
                 if (this.audio && this.audio.size < 1024 * 1024) {
+
+                    this.uploadTask = storageRef.put(this.audio);
                     // create new path in storage
-                    storageRef.put(this.audio).then(e => {
+                    this.uploadTask.then(e => {
                         const id = user.uid;
                         e;
                         console.log('Uploaded!');
                         storageRef.getDownloadURL().then(audioURL => {
-                            console.log(audioURL);
                             // set firestore data equal to new data
                             db.collection("users").doc(id).update({
                                 audio: audioURL,
@@ -252,6 +304,7 @@ import Back from '../../assets/SVG/exit.svg';
                 }
                 
             },
+
             fileError () {
                 this.$notify({
                     message: 'File exceeds the 1MB limit!',
@@ -316,7 +369,7 @@ import Back from '../../assets/SVG/exit.svg';
                         },
                     },
                 });
-            }
+            },
         },
         user () {
              return this.$store.getters.user;

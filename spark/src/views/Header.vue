@@ -100,7 +100,7 @@ import User from '../assets/SVG/user.svg';
             async signOut() {
                 try {
                     const data = await firebase.auth().signOut();
-                    console.log('signed out', data);
+                    data;
                     // reset the vuex state
                     this.$store.dispatch('resetCurrentState');
                     this.$router.replace({name: 'Login'});

@@ -94,8 +94,6 @@ import 'firebase/firestore';
                 this.links.spotify = doc.links.spotify;
                 this.links.facebook = doc.links.facebook;
                 this.links.instagram = doc.links.instagram;
-
-                console.log(this.links);
             })
         },
     }

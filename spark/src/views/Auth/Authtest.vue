@@ -44,7 +44,6 @@ import {db} from '../../main';
                 this.cUserData.cUsername = document.username;
                 this.cUserData.cBio = document.bio;
                 this.cUserData.cIsAdmin = document.isAdmin;
-                console.log('User Data', this.cUserData)
             })
         },
         methods: {
@@ -52,7 +51,6 @@ import {db} from '../../main';
                 
                 // set variable equal to user input
                 const newBio = this.$refs.bioInput.value;
-                console.log(newBio);
                 
                 // if new input exists when submitted
                 if (newBio) {
@@ -63,10 +61,9 @@ import {db} from '../../main';
                     );
 
                     this.$refs.bioInput.value = newBio;
-                    console.log('epic');
                 }
                 else {
-                    alert('error');
+                    console.log('error');
                 }
                 
             }

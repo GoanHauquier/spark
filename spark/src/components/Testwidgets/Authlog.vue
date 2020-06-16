@@ -20,7 +20,6 @@ import 'firebase/firestore';
             async signOut() {
                 try {
                     const data = await firebase.auth().signOut();
-                    console.log('signed out', data);
                     // reset the vuex state
                     this.$store.dispatch('resetCurrentState');
                     this.$router.replace({name: 'Login'});

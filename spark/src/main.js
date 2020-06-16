@@ -13,11 +13,16 @@ import SvgTransition from 'vue-svg-transition'
 import VueKinesis from 'vue-kinesis'
 import VueTypedJs from 'vue-typed-js'
 import VueAnimate from 'vue-animate-scroll'
+import VueProgressBar from 'vue-progressbar'
 
 // firebase credentials
 import config from './config'
 
-
+Vue.use(VueProgressBar, {
+  color: 'rgb(143, 255, 199)',
+  failedColor: 'red',
+  height: '2px'
+})
 Vue.use(VueAnimate)
 Vue.use(VueTypedJs)
 Vue.use(VueKinesis)
@@ -53,7 +58,7 @@ let app;
 // check if user is logged in before app is built
 // to prevent weird route behaviour
 firebase.auth().onAuthStateChanged(user=> {
-  console.log(user);
+  user;
   if(!app) {
     app = new Vue({
       router,
