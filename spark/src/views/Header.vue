@@ -16,6 +16,25 @@
                     </router-link>
                 </div>
 
+                <!-- Burger menu -->
+
+                    <i id="burger" class="material-icons" @click="burger()" ref="burger">menu</i>
+                    <i id="quit" class="material-icons" @click="quit()" ref="quit">clear</i>
+
+                    <div  v-if="loggedIn" id="links" class="fade-in text-center" ref="links">
+                        <div @click="quit()"><router-link v-show="user.audio" to="/spark" class="start registration nav">HOME</router-link></div>
+                        <div @click="quit()"><router-link v-show="user.audio" to="/spark" class="start registration nav">QUEUE</router-link></div>
+                        <div @click="quit()"><router-link to="/about" class="about nav">ABOUT</router-link></div>
+                        <div @click="quit()"><router-link to="/profile" v-bind:class="[{ 'hasNotifications': isActive} , 'registration', 'usericon', 'nav' ]">PROFILE</router-link></div>
+                        <div @click="quit()"><a @click="signOut()" class="signout nav">SIGN OUT</a></div>
+                    </div>
+                    <div v-else id="links" class="fade-in text-center" ref="links">
+                        <div @click="quit()"><router-link to="/about" class="about nav">About</router-link></div>
+                        <div @click="quit()"><router-link to="/login" class="registration nav">Login</router-link></div>
+                        <div @click="quit()"><router-link to="/register" class="registration nav">Register</router-link> </div>
+                    </div>
+                <!--  -->
+
                 <div class="text-right desktop-nav col-6 header right">
                     <span v-if="loggedIn">
                         <router-link v-show="user.audio" to="/spark" class="start registration nav">QUEUE</router-link>
@@ -88,6 +107,23 @@ import User from '../assets/SVG/user.svg';
             });
         },
         methods: {
+            burger(){
+                const burger = this.$refs.burger;
+                const links = this.$refs.links;
+                const quit = this.$refs.quit;
+                burger.style.padding = '30px 15px 200vw 200vw';
+                links.style.display = 'flex';
+                quit.style.display = 'inline';
+            },
+
+            quit(){
+                const burger = this.$refs.burger;
+                const links = this.$refs.links;
+                const quit = this.$refs.quit;
+                burger.style.padding = '30px 15px 30px 30px';
+                links.style.display = 'none';
+                quit.style.display = 'none';
+            },
             // removeNotifications() {
             //     console.log('remove');
             //     firebase.database()

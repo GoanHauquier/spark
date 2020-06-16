@@ -13,21 +13,32 @@ import SvgTransition from 'vue-svg-transition'
 import VueKinesis from 'vue-kinesis'
 import VueTypedJs from 'vue-typed-js'
 import VueAnimate from 'vue-animate-scroll'
-import VueProgressBar from 'vue-progressbar'
 
 // firebase credentials
 import config from './config'
 
-Vue.use(VueProgressBar, {
-  color: 'rgb(143, 255, 199)',
-  failedColor: 'red',
-  height: '2px'
-})
 Vue.use(VueAnimate)
 Vue.use(VueTypedJs)
 Vue.use(VueKinesis)
 Vue.use(SvgTransition)
-Vue.use(VueNotification)
+Vue.use(VueNotification, {
+  theme: {
+    // darken colors are used for background on icon
+    colors: {
+      success: '#88ebc4',
+      darkenSuccess: '#2d8e36',
+      info: '#5d6a89',
+      darkenInfo: '#535f7b',
+      warning: '#f8a623',
+      darkenWarning: '#f69a07',
+      error: '#ff4577',
+      darkenError: '#ff245f',
+      offline: '#ff4577',
+      darkenOffline: '#ff245f',
+    },
+    boxShadow: '0',
+  },
+})
 Vue.use(VueAudio)
 Vue.use(firestorePlugin)
 Vue.use(BootstrapVue)

@@ -2,11 +2,9 @@
     <div class="wrapper"> <!-- Main wrapper -->
         <div class="top-wrapper"> <!-- Top wrapper -->
             <Header />
-            <router-view />
-            
+            <router-view />    
         </div>
         <Footer />
-        <vue-progress-bar></vue-progress-bar>
     </div>
 </template>
 

@@ -46,6 +46,7 @@
           <div class="faq">
             <VueFaqAccordion 
               :items="myItems"
+              activeColor="#eb9788"
             />
         </div>
         </div>

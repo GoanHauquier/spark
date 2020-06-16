@@ -311,11 +311,6 @@ import Back from '../../assets/SVG/exit.svg';
                     top: true,
                     right: true,
                     type: 'warning',
-                    theme: {
-                        colors: {
-                            warning: '#f8a623',
-                        },
-                    },
                 });
             },
             imageError () {
@@ -324,11 +319,6 @@ import Back from '../../assets/SVG/exit.svg';
                     top: true,
                     right: true,
                     type: 'warning',
-                    theme: {
-                        colors: {
-                            warning: '#f8a623',
-                        },
-                    },
                 });
             },
             audioError () {
@@ -337,11 +327,6 @@ import Back from '../../assets/SVG/exit.svg';
                     top: true,
                     right: true,
                     type: 'warning',
-                    theme: {
-                        colors: {
-                            warning: '#f8a623',
-                        },
-                    },
                 });
             },
             fileUploaded() {
@@ -349,12 +334,7 @@ import Back from '../../assets/SVG/exit.svg';
                     message: 'File uploaded!',
                     top: true,
                     right: true,
-                    type: 'succes',
-                    theme: {
-                        colors: {
-                            succes: '#fofofo',
-                        },
-                    },
+                    type: 'success',
                 });
             },
             saved () {
@@ -362,12 +342,7 @@ import Back from '../../assets/SVG/exit.svg';
                     message: 'Saved!',
                     top: true,
                     right: true,
-                    type: 'succes',
-                    theme: {
-                        colors: {
-                            succes: '#fofofo',
-                        },
-                    },
+                    type: 'success',
                 });
             },
         },

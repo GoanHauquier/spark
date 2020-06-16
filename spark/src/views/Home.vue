@@ -1,5 +1,5 @@
 <template>
-  <div class="home" style="overflow:hidden">    
+  <div class="home" v-cloak style="overflow:hidden">    
       <section>
         <div class="container fade-in">
           <div v-show="currentUser && !user.audio"><p>Remember to upload an audiofile</p></div>

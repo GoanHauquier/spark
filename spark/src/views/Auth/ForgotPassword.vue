@@ -6,6 +6,7 @@
             <input class="inputfield" type="email" v-model="email" placeholder="e-mailadress"><br>
             <input class="formbutton" type="submit" value="Send">
         </form>
+        <router-link to="/login">Back</router-link>
         </div>
     </div>
 </template>
