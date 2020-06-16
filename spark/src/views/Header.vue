@@ -22,16 +22,16 @@
                     <i id="quit" class="material-icons" @click="quit()" ref="quit">clear</i>
 
                     <div  v-if="loggedIn" id="links" class="fade-in text-center" ref="links">
-                        <div @click="quit()"><router-link v-show="user.audio" to="/spark" class="start registration nav">HOME</router-link></div>
+                        <div @click="quit()"><router-link v-show="user.audio" to="/" class="start registration nav">HOME</router-link></div>
                         <div @click="quit()"><router-link v-show="user.audio" to="/spark" class="start registration nav">QUEUE</router-link></div>
                         <div @click="quit()"><router-link to="/about" class="about nav">ABOUT</router-link></div>
                         <div @click="quit()"><router-link to="/profile" v-bind:class="[{ 'hasNotifications': isActive} , 'registration', 'usericon', 'nav' ]">PROFILE</router-link></div>
-                        <div @click="quit()"><a @click="signOut()" class="signout nav">SIGN OUT</a></div>
+                        <div @click="quit()" class="burger-signout"><a @click="signOut()" class="signout nav">SIGN OUT</a></div>
                     </div>
                     <div v-else id="links" class="fade-in text-center" ref="links">
-                        <div @click="quit()"><router-link to="/about" class="about nav">About</router-link></div>
                         <div @click="quit()"><router-link to="/login" class="registration nav">Login</router-link></div>
-                        <div @click="quit()"><router-link to="/register" class="registration nav">Register</router-link> </div>
+                        <div @click="quit()"><router-link to="/register" class="registration nav">Register</router-link></div>
+                        <div @click="quit()"><router-link to="/about" class="about nav">About</router-link></div>
                     </div>
                 <!--  -->
 
@@ -161,7 +161,7 @@ import User from '../assets/SVG/user.svg';
     &:hover {
         stroke-dasharray: 50;
         animation: dash 4s infinite;
-        transform: scale(1.02);
+
     }
 
 }

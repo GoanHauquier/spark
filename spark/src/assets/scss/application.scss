@@ -134,6 +134,11 @@ a {
 
   #links div {
       margin-bottom: 30px;
+
+      &:last-child {
+          margin-top: 15px;
+          font-size: 0.7em !important;
+      }
   }
   
   #links a{
@@ -143,6 +148,22 @@ a {
     color: $gray;
     font-size: 2em;
     z-index: 10;
+  }
+
+  .privacy-wrapper {
+      .privacy {
+        padding-top: 20vh;
+        padding-bottom: 15vh;
+      }
+
+      h1 {
+          margin-bottom: 30px;
+      }
+      p {
+          margin: 30px;
+          line-height: 150%;
+      }
+
   }
 
 

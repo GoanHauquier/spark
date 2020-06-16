@@ -65,26 +65,16 @@ import 'firebase/auth';
                 this.$notify({
                     message: 'These credentials do not match!',
                     top: true,
-                    right: true,
+                    left: true,
                     type: 'warning',
-                    theme: {
-                        colors: {
-                            warning: '#f8a623',
-                        },
-                    },
                 });
             },
             fieldError () {
                 this.$notify({
                     message: 'Please fill in all fields!',
                     top: true,
-                    right: true,
+                    left: true,
                     type: 'warning',
-                    theme: {
-                        colors: {
-                            warning: '#f8a623',
-                        },
-                    },
                 });
             },
         },

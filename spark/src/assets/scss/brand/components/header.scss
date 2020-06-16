@@ -19,6 +19,7 @@
         transition: 0.2s ease;
         padding: 3px;
         
+        
         &:hover {
             background-color: $gray;
             color: white;
@@ -86,6 +87,7 @@
     .text {
         display: none;
     }
+    
 }
 
 @media (max-width: $sm) {

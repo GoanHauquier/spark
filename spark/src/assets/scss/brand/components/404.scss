@@ -1,0 +1,31 @@
+.error-wrapper {
+    h1 {
+        font-size: 3em !important;
+    }
+
+    img {
+        position: absolute;
+        right: 10%;
+        bottom: 10%;
+        width: 400px;
+        height: 400px;
+    }
+    a {
+        color: black;
+    }
+
+}
+
+@media (max-width: $xs) {
+    .error-wrapper {
+        h1 {
+            font-size: 1.5em !important;
+        }
+        img {
+            right: 5%;
+            bottom: 15%;
+            width: 200px;
+            height: 200px;
+        }
+    }
+}

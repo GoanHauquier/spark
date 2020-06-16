@@ -13,6 +13,7 @@
               <h3><u>1. Upload your audio</u></h3>
               <p>Upload a small snippet of your music you're most proud of.</p>
               <p>You can only upload 1MB! Get creative.</p>
+              <router-link to="/edit"><u>Upload here</u></router-link>
             </div>
             <div class="col-sm-6">
               
@@ -42,7 +43,7 @@
         </div>
 
         <div v-animate="'slide-up'" class="text-center faq-box">
-          <h3><u>FAQ</u></h3>
+          <h3 id="FAQAnchor"><u>FAQ</u></h3>
           <div class="faq">
             <VueFaqAccordion 
               :items="myItems"

@@ -143,65 +143,40 @@ import {db} from '../../main';
                 this.$notify({
                     message: 'Please fill in all fields!',
                     top: true,
-                    right: true,
+                    left: true,
                     type: 'warning',
-                    theme: {
-                        colors: {
-                            warning: '#f8a623',
-                        },
-                    },
                 });
             },
             passwordError () {
                 this.$notify({
                     message: "Passwords don't match!",
                     top: true,
-                    right: true,
+                    left: true,
                     type: 'warning',
-                    theme: {
-                        colors: {
-                            warning: '#f8a623',
-                        },
-                    },
                 });
             },
             credentialError () {
                 this.$notify({
                     message: 'These credentials do not match!',
                     top: true,
-                    right: true,
+                    left: true,
                     type: 'warning',
-                    theme: {
-                        colors: {
-                            warning: '#f8a623',
-                        },
-                    },
                 });
             },
             emailError () {
                 this.$notify({
                     message: 'Email already in use!',
                     top: true,
-                    right: true,
+                    left: true,
                     type: 'warning',
-                    theme: {
-                        colors: {
-                            warning: '#f8a623',
-                        },
-                    },
                 });
             },
             succesNotification() {
                 this.$notify({
                     message: 'Verification email sent to ' + this.email,
                     top: true,
-                    right: true,
-                    type: 'succes',
-                    theme: {
-                        colors: {
-                            succes: '#fofofo',
-                        },
-                    },
+                    left: true,
+                    type: 'success',
                 });
             },
         },

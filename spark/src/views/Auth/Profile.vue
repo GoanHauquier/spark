@@ -37,7 +37,7 @@
 
                         <Friends class="col-md-6 border friendwidget" />
 
-                        <div v-if="user.audio" class="col-md-12 text-left border audio">
+                        <div v-if="user.audio" class="col-md-12 text-center border audio">
                             <h3>Your audio</h3>
                             <div class="player" >
                                 <mini-audio       
@@ -47,16 +47,22 @@
                                 </mini-audio >
                             </div>
                         </div>
-                        <div v-else class="col-md-12 text-left">
+                        <div v-else class="col-md-12 text-center">
 
-                            <router-link to="/edit">
+                            <router-link to="/edit#AudioUpload">
                                 <h3 class="uploadaudio">
                                     Upload an mp3 file
                                 </h3>
                             </router-link>
 
                     </div>
-                        <div class="socials col-md-12 text-center row border">
+                    <div class="col-12 text-center">
+                        <h3>Your social media links</h3>
+                    </div>
+                    <div class=" col-md-12 text-center" v-if="links.soundcloud.link == '' && links.spotify.link == '' && links.facebook.link == '' && links.instagram.link == ''">
+                        <p>It seems a little quiet here, you can add your URL's <router-link to='/edit#vSocialMedia'><u>here</u></router-link></p>
+                    </div>
+                        <div v-else class="socials col-md-12 text-center row border">
                             
                             <a :href="links.soundcloud.link" target="_blank" v-show="links.soundcloud.link != ''">
                                 <div :class="links.soundcloud.class"><img src="../../assets/images/socials/soundcloud.png" alt="soundcloud logo"></div>
@@ -97,13 +103,17 @@ import Settings from '../../assets/SVG/settings.svg';
                     soundcloud: '',
                     spotify: '',
                     facebook: '',
-                    instagram: ''
-                }
+                    instagram: '',
+                },
+                socials: false
             }
         },
         components: {
             Friends,
             Settings,
+        },
+        mounted () {
+            
         },
         created () {
             const user = firebase.auth().currentUser;
@@ -119,7 +129,7 @@ import Settings from '../../assets/SVG/settings.svg';
             .get()
             .then(snapshot => {
                 const document = snapshot.data();
-                
+
                 this.links.soundcloud = document.links.soundcloud;
                 this.links.spotify = document.links.spotify;
                 this.links.facebook = document.links.facebook;

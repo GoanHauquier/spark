@@ -23,7 +23,7 @@
                             </div>   
                         </div>
 
-                        <div v-if="userData.audio" class="col-md-12 text-left border audio">
+                        <div v-if="userData.audio" class="col-md-12 text-center border audio">
                             <h3>Your audio</h3>
                             <div class="player" >
                                 <mini-audio       
@@ -33,7 +33,12 @@
                                 </mini-audio >
                             </div>
                         </div>
-                        <h3 class="connect">Connect with {{ userData.username }}</h3>
+                        <div class=" col-12 text-center">
+                            <h3 class="connect">Connect with {{ userData.username }}</h3>
+                        </div>
+                        <div class=" col-md-12 text-center" v-if="links.soundcloud.link == '' && links.spotify.link == '' && links.facebook.link == '' && links.instagram.link == ''">
+                            <p>{{ userData.username }} hasn't added any social media links yet</p>
+                        </div>
                         <div class="socials col-md-12 text-center row border">
                             <a :href="links.soundcloud.link" target="_blank" v-show="links.soundcloud.link != ''">
                                 <div :class="links.soundcloud.class"><img src="../../assets/images/socials/soundcloud.png" alt="soundcloud logo"></div>

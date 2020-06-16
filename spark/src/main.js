@@ -27,9 +27,9 @@ Vue.use(VueNotification, {
     colors: {
       success: '#88ebc4',
       darkenSuccess: '#2d8e36',
-      info: '#5d6a89',
+      info: '#eb889c',
       darkenInfo: '#535f7b',
-      warning: '#f8a623',
+      warning: '#d26350',
       darkenWarning: '#f69a07',
       error: '#ff4577',
       darkenError: '#ff245f',

@@ -6,8 +6,8 @@
                 </div>
                 <div class="text-right col-8 footer">
                     <!-- <a href="" class="footersocial"><Facebook /></a> -->
-                    <a href="">Privacy</a>
-                    <router-link to="/about">About</router-link>
+                    <router-link to='/privacy#PrivacyPage'>Privacy</router-link>
+                    <router-link to="/about#FAQAnchor">FAQ</router-link>
                 </div>
         </div>           
     </div>

@@ -169,13 +169,8 @@ import Heart from '../../assets/SVG/heart.svg';
                 this.$notify({
                     message: "You've got a new Spark!",
                     top: true,
-                    right: true,
-                    type: 'succes',
-                    theme: {
-                        colors: {
-                            succes: '#eb9788',
-                        },
-                    },
+                    left: true,
+                    type: 'info',
                 });
             },
         },

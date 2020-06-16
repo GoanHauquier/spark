@@ -43,26 +43,16 @@ import * as firebase from 'firebase/app';
                 this.$notify({
                     message: 'Email sent!',
                     top: true,
-                    right: true,
-                    type: 'warning',
-                    theme: {
-                        colors: {
-                            warning: '#f8a623',
-                        },
-                    },
+                    left: true,
+                    type: 'success',
                 });
             },
             error () {
                 this.$notify({
                     message: 'Please enter a valid email!',
                     top: true,
-                    right: true,
+                    left: true,
                     type: 'warning',
-                    theme: {
-                        colors: {
-                            warning: '#f8a623',
-                        },
-                    },
                 });
             },
         },

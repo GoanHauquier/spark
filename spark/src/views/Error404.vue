@@ -1,8 +1,19 @@
 <template>
     <div class="container-fluid error-wrapper"> 
-        <div class="error container text-center">
-            <h1 class="col-12">404</h1>
+        <div class="error container">
+            <vue-typed-js :strings="['I have looked far and wide...']" :loop="false" :showCursor="false" :typeSpeed="50">
+                <h1><span class="typing"></span></h1>
+            </vue-typed-js>
+            <vue-typed-js :strings="['But this page is nowhere to be found']" :loop="false" :showCursor="false" :startDelay="4000" :typeSpeed="50">
+                <h1><span class="typing"></span></h1>
+            </vue-typed-js>
+            <br>
+            <br>
+            <vue-typed-js :strings="['Click <u>HERE</u> to go back']" :loop="false" :showCursor="false" :startDelay="8000" :typeSpeed="50">
+                <router-link to='/'><h1><span class="typing"></span></h1></router-link>
+            </vue-typed-js>
         </div>
+        <img src="../assets/images/error-404-monochrome-400px.png" alt="">
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
-    <div class="form-wrapper container-fluid">
-        <div class="edit form container profile">
+    <div class="form-wrapper container-fluid" v-cloak>
+        <div class="edit form container profile editprofile">
             <div class="row">
                 <div class="text-left col-6">
                     <h3>Edit profile</h3>
@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <p class="text-left" style="font-weight:bold;">Audio (1MB Max)</p>
+                    <p id="AudioUpload" class="text-left" style="font-weight:bold;">Audio (1MB Max)</p>
                     <div class="file-upload">
                         <label for="upload" class="file-upload__label">Upload audiofile</label>
                         <input id="upload" class="file-upload__input" @change="getAudio()" type="file" ref="myAudio" name="file-upload">
@@ -47,10 +47,10 @@
                     <input type="text" :value="cUserData.cUsername" maxlength="20" class="inputfield inputedit" ref="usernameInput">
 
                     <p class="text-left" style="font-weight:bold;">Bio</p>
-                    <textarea :value="cUserData.cBio" ref="bioInput" maxlength="255" placeholder="My bio"></textarea>
+                    <textarea :value="cUserData.cBio" ref="bioInput" maxlength="500" placeholder="My bio"></textarea>
                 </div>
                 
-                <div class="col-sm-6">
+                <div class="col-sm-6" id="SocialMedia">
                     <p class="text-left" style="font-weight:bold;">Socials</p>
                     <input type="text" :value="cUserData.cLinks.soundcloud" placeholder="Soundcloud" ref="soundcloudInput" class="inputfield inputedit">
                     <input type="text" :value="cUserData.cLinks.spotify" placeholder="Spotify" ref="spotifyInput" class="inputfield inputedit">
@@ -308,24 +308,27 @@ import Back from '../../assets/SVG/exit.svg';
             fileError () {
                 this.$notify({
                     message: 'File exceeds the 1MB limit!',
+                    left: true,
                     top: true,
-                    right: true,
+                    hideIcon: true,
                     type: 'warning',
                 });
             },
             imageError () {
                 this.$notify({
                     message: 'File is not an image!',
+                    left: true,
                     top: true,
-                    right: true,
+                    hideIcon: true,
                     type: 'warning',
                 });
             },
             audioError () {
                 this.$notify({
                     message: 'File is not an mp3!',
+                    left: true,
                     top: true,
-                    right: true,
+                    hideIcon: true,
                     type: 'warning',
                 });
             },
@@ -333,7 +336,7 @@ import Back from '../../assets/SVG/exit.svg';
                 this.$notify({
                     message: 'File uploaded!',
                     top: true,
-                    right: true,
+                    left: true,
                     type: 'success',
                 });
             },
@@ -341,7 +344,7 @@ import Back from '../../assets/SVG/exit.svg';
                 this.$notify({
                     message: 'Saved!',
                     top: true,
-                    right: true,
+                    left: true,
                     type: 'success',
                 });
             },
